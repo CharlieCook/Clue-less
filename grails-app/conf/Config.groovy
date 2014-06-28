@@ -38,6 +38,12 @@ grails.mime.types = [ // the first one is the default format
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**']
 
+grails.resources.modules = {
+	application{
+		resource url: '/js/jquery-2.1.1.min.js'
+	}
+}
+
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
 
