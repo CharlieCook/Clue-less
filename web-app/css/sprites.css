@@ -100,3 +100,59 @@
 	background-image: url("../images/sprites.png");
     background-position: -900px -769px;
 }
+
+.upLeftArrow{
+    background-image: url("../images/sprites.png");
+    background-position: -311px -1283px;
+    height: 64px;
+    width: 64px;
+}
+
+.upArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -308px -1189px;
+    height: 64px;
+    width: 64px;
+}
+
+.upRightArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -311px -1452px;
+    height: 64px;
+    width: 64px;
+}
+
+.rightArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -316px -945px;
+    height: 64px;
+    width: 64px;
+}
+
+.downRightArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -306px -1536px;
+    height: 64px;
+    width: 64px;
+}
+
+.downArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -308px -1121px;
+    height: 64px;
+    width: 64px;
+}
+
+.downLeftArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -308px -1367px;
+    height: 64px;
+    width: 64px;
+}
+
+.leftArrow{
+	background-image: url("../images/sprites.png");
+    background-position: -298px -1031px;
+    height: 64px;
+    width: 64px;
+}

@@ -1,6 +1,6 @@
 <r:require modules="gameboard" />
 <table id="gameTable">
-	<tr class="topRow">
+	<tr>
 		<td><span class="studyRoom">&nbsp</span></td>
 		<td><span class="hall">&nbsp</span></td>
 		<td><span class="hallRoom">&nbsp</span></td>

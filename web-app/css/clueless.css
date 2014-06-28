@@ -10,6 +10,12 @@
 	width: 100%;
 }
 
+#movementRing{
+	float: left;
+	min-width: 150px;
+	width: 100%;
+}
+
 #rightPanelContainer{
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     display: inline-block;

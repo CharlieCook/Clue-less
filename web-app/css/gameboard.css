@@ -1,26 +1,26 @@
 @CHARSET "ISO-8859-1";
 
-tr:nth-child(2) td:nth-child(1), tr:nth-child(4) td:nth-child(1){
+#gameboard tr:nth-child(2) td:nth-child(1), tr:nth-child(4) td:nth-child(1){
 	padding-left: 154px;	
 }
 
-tr:nth-child(2) td:nth-child(3), tr:nth-child(4) td:nth-child(3){
+#gameboard tr:nth-child(2) td:nth-child(3), tr:nth-child(4) td:nth-child(3){
 	padding-left: 45px;	
 }
 
-tr:nth-child(1) td:nth-child(2), tr:nth-child(1) td:nth-child(4){
+#gameboard tr:nth-child(1) td:nth-child(2), tr:nth-child(1) td:nth-child(4){
 	padding-top: 144px;	
 }
 
-tr:nth-child(3) td:nth-child(2), tr:nth-child(3) td:nth-child(4){
+#gameboard tr:nth-child(3) td:nth-child(2), tr:nth-child(3) td:nth-child(4){
 	padding-top: 35px;	
 }
 
-tr:nth-child(5) td:nth-child(2) span, tr:nth-child(5) td:nth-child(4) span{
+#gameboard tr:nth-child(5) td:nth-child(2) span, tr:nth-child(5) td:nth-child(4) span{
 	position: relative;
     top: -64px;
 }
 
-td span{
+#gameTable tr td span{
 	display: block;
 }

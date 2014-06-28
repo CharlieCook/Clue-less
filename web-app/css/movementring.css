@@ -1,1 +1,4 @@
 @CHARSET "ISO-8859-1";
+#movementRingTable tbody tr td span{
+	display: block;
+}

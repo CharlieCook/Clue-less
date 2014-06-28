@@ -52,7 +52,7 @@ grails.resources.modules = {
 		resource url: '/css/sprites.css'
 		resource url: '/css/gamestatus.css'
 	}
-	movementRing{
+	movementring{
 		resource url: '/css/sprites.css'
 		resource url: '/css/movementring.css'
 	}
