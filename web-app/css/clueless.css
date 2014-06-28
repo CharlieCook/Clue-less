@@ -4,10 +4,6 @@
 	float: left;
 }
 
-#gameboard *{
-	padding:10px;
-}
-
 #gameStatus{
 	float: left;
 	min-width: 150px;
