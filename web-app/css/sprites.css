@@ -1,0 +1,65 @@
+@CHARSET "ISO-8859-1";
+
+.studyRoom{
+	background-image: url("../images/sprites.png");
+    background-position: 0 -53px;
+    height: 250px;
+    width: 279px;
+}
+
+.libraryRoom{
+	background-image: url("../images/sprites.png");
+    background-position: 0 -354px;
+    height: 250px;
+    width: 279px;
+}
+
+.conservatoryRoom{
+	background-image: url("../images/sprites.png");
+    background-position: 51px -685px;
+    height: 250px;
+    width: 279px;
+}
+
+.hallRoom{
+	background-image: url("../images/sprites.png");
+    background-position: -300px -53px;
+    height: 250px;
+    width: 217px;
+}
+
+.billiardsRoom{
+	background-image: url("../images/sprites.png");
+    background-position: -300px -354px;
+    height: 250px;
+    width: 217px;
+}
+
+
+.ballRoom{
+	background-image: url("../images/sprites.png");
+    background-position: -300px -685px;
+    height: 250px;
+    width: 217px;
+}
+
+.loungeRoom{
+    background-image: url("../images/sprites.png");
+    background-position: -600px -54px;
+    height: 250px;
+    width: 279px;
+}
+
+.diningRoom{
+	background-image: url("../images/sprites.png");
+    background-position: -600px -354px;
+    height: 250px;
+    width: 279px;
+}
+
+.kitchenRoom{
+	background-image: url("../images/sprites.png");
+    background-position: -604px -682px;
+    height: 250px;
+    width: 279px;
+}

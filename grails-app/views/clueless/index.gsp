@@ -1,11 +1,12 @@
 <html>
 <head>
-<r:layoutResources/>
-<r:require modules="application"/>
+<r:require modules="application" />
+<r:layoutResources />
 </head>
 <body>
-<r:layoutResources/>
-
-hello world
+<r:layoutResources />
+	<div id="gameBoard">
+		<g:render template="gameBoard" />
+	</div>
 </body>
 </html>

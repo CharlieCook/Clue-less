@@ -41,6 +41,8 @@ grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/
 grails.resources.modules = {
 	application{
 		resource url: '/js/jquery-2.1.1.min.js'
+		resource url: '/css/sprites.css'
+		resource url: '/css/clueless.css'
 	}
 }
 
