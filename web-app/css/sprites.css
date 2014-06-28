@@ -63,3 +63,33 @@
     height: 250px;
     width: 279px;
 }
+
+.scarletPlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px 0;
+}
+
+.mustardPlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px -138px;
+}
+
+.whitePlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px -300px;
+}
+
+.greenPlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px -449px;
+}
+
+.peacockPlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px -602px;
+}
+
+.plumPlayer{
+	background-image: url("../images/sprites.png");
+    background-position: -900px -769px;
+}
