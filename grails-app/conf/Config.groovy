@@ -48,6 +48,14 @@ grails.resources.modules = {
 		resource url: '/css/sprites.css'
 		resource url: '/css/gameboard.css'
 	}
+	gamestatus{
+		resource url: '/css/sprites.css'
+		resource url: '/css/gamestatus.css'
+	}
+	movementRing{
+		resource url: '/css/sprites.css'
+		resource url: '/css/movementring.css'
+	}
 }
 
 // Legacy setting for codec used to encode data with ${}

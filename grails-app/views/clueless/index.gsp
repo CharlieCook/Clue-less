@@ -6,8 +6,13 @@
 	<div id="gameBoard">
 		<g:render template="gameBoard" />
 	</div>
-	<div id="gameStatus">
-		<g:render template="gameStatus" />
+	<div id="rightPanelContainer">
+		<div id="gameStatus">
+			<g:render template="gameStatus" />
+		</div>
+		<div id="movementRing">
+			<g:render template="movementRing" />
+		</div>
 	</div>
 
 	<r:layoutResources />
