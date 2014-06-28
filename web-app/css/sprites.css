@@ -64,6 +64,13 @@
     width: 279px;
 }
 
+.hall{
+	background-image: url("../images/sprites.png");
+ 	background-position: 0 -1078px;
+    height: 123px;
+    width: 103px;
+}
+
 .scarletPlayer{
 	background-image: url("../images/sprites.png");
     background-position: -900px 0;

@@ -4,12 +4,24 @@
 	float: left;
 }
 
+#gameboard *{
+	padding:10px;
+}
+
 #gameStatus{
 	float: left;
+	min-width: 150px;
+	width: 20%;
 }
 
 #playerIcon{
 	width:112px;
 	height:126px;
 	float:left;
+}
+
+div {
+    background: none repeat scroll 0 0 lightblue;
+    border-radius: 15px;
+    margin: 15px;
 }
