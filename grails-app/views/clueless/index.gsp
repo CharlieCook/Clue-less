@@ -15,8 +15,9 @@
 		<div id="movementRing">
 			<g:render template="movementRing" />
 		</div>
+		<div id=suggestionbox>
+			<g:render template="suggestionBox" />
+		</div>
 	</div>
-
-	
 </body>
 </html>
