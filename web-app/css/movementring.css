@@ -1,4 +1,10 @@
 @CHARSET "ISO-8859-1";
+
+#movementRingTable{
+	margin-left: 33%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
 #movementRingTable tbody tr td span{
 	display: block;
 }

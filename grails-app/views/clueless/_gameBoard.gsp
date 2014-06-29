@@ -9,9 +9,9 @@
 	</tr>
 	<tr>
 		<td><span class="hall">&nbsp</span></td>
-		<td>empty</td>
+		<td></td>
 		<td><span class="hall">&nbsp</span></td>
-		<td>empty</td>
+		<td></td>
 		<td><span class="hall">&nbsp</span></td>
 	</tr>
 	<tr>
@@ -22,9 +22,9 @@
 		<td><span class="diningRoom">&nbsp</span></td>
 	<tr>
 		<td><span class="hall">&nbsp</span></td>
-		<td>empty</td>
+		<td></td>
 		<td><span class="hall">&nbsp</span></td>
-		<td>empty</td>
+		<td></td>
 		<td><span class="hall">&nbsp</span></td>
 	</tr>
 	<tr>
