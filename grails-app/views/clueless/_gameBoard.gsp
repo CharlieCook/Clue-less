@@ -1,4 +1,4 @@
-<r:require modules="gameboard" />
+
 <table id="gameTable">
 	<tr>
 		<td><span class="studyRoom">&nbsp</span></td>

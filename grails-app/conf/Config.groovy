@@ -43,17 +43,8 @@ grails.resources.modules = {
 		resource url: '/js/jquery-2.1.1.min.js'
 		resource url: '/css/sprites.css'
 		resource url: '/css/clueless.css'
-	}
-	gameboard{
-		resource url: '/css/sprites.css'
 		resource url: '/css/gameboard.css'
-	}
-	gamestatus{
-		resource url: '/css/sprites.css'
 		resource url: '/css/gamestatus.css'
-	}
-	movementring{
-		resource url: '/css/sprites.css'
 		resource url: '/css/movementring.css'
 	}
 }

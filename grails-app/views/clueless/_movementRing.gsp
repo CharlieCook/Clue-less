@@ -1,4 +1,4 @@
-<r:require modules="movementring" />
+
 <table id="movementRingTable">
 	<tr>
 		<td><span class="upLeftArrow">&nbsp</span></td>
