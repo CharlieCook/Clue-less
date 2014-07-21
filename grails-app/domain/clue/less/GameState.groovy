@@ -5,5 +5,13 @@ class GameState {
     static constraints = {
     }
 	
-	Player[] players;
+	UUID id
+	
+	Player[] players
+	
+	Weapons solutionWeapon
+	
+	Locations solutionLocation
+	
+	Suspects solutionSuspect
 }
