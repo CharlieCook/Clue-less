@@ -1,5 +1,5 @@
 package clue.less;
 
-public enum Locations {
+public enum Location {
 	HALL, LIBRARY, KITCHEN, STUDY
 }

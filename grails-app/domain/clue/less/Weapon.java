@@ -1,6 +1,6 @@
 package clue.less;
 
-public enum Weapons {
+public enum Weapon {
 	CANDLESTICK, WRENCH, PIPE, REVOLVER, ROPE
 
 }

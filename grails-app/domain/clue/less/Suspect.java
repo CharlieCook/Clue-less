@@ -1,5 +1,5 @@
 package clue.less;
 
-public enum Suspects {
+public enum Suspect {
 	GREEN, MUSTARD, SCARLET
 }

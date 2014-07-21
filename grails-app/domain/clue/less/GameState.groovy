@@ -9,9 +9,9 @@ class GameState {
 	
 	Player[] players
 	
-	Weapons solutionWeapon
+	Weapon solutionWeapon
 	
-	Locations solutionLocation
+	Location solutionLocation
 	
-	Suspects solutionSuspect
+	Suspect solutionSuspect
 }
