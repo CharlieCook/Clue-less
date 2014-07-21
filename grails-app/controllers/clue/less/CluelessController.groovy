@@ -1,6 +1,8 @@
 package clue.less
 
 class CluelessController {
+	
+	def cluelessService;
 
     def index() { }
 	
