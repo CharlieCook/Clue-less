@@ -34,36 +34,36 @@ class GameEngineService {
 	/**
 	 * Moves the corresponding player
 	 * 
-	 * @param UUID - player's ID
+	 * @param Player - player that is attempting to move
 	 * @return
 	 */
-	def movePlayer(UUID) {
+	def movePlayer(Player) {
 		
 	}
 	
 	/**
 	 * Handles a player making an accusation.
 	 * 
-	 * @param UUID - player ID making accusation
+	 * @param Player - player making accusation
 	 * @param Suspect - guessed suspect
 	 * @param Weapon - guessed weapon
 	 * @param Location - guessed location
 	 * @return Success or failure
 	 */
-	def makeAccusation(UUID, Suspect, Weapon, Location) {
+	def makeAccusation(Player, Suspect, Weapon, Location) {
 		
 	}
 	
 	/**
 	 * Handles a player making a suggestion.
 	 * 
-	 * @param UUID - player ID making suggestion
+	 * @param Player - player ID making suggestion
 	 * @param Suspect - guessed suspect 
 	 * @param Weapon - guessed weapon
 	 * @param Location - guessed location
 	 * @return Checks if another player has a card or returns that no one has a card
 	 */
-	def makeSuggestion(UUID, Suspect, Weapon, Location) {
+	def makeSuggestion(Player, Suspect, Weapon, Location) {
 		
 	}
 	
@@ -101,8 +101,7 @@ class GameEngineService {
 	 * @param player - ID of the player
 	 * @return Success on joining a game or not
 	 */
-	def joinGame(UUID game, Player player) {
-		gameState = GameState.findByUUID(game)
+	def joinGame(GameState game, Player player) {
 		if(gameState != null) {
 			if(gameState.players.size < GameState.MAX_PLAYERS) {
 				gameState.players.add(player)
