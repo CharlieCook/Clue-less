@@ -1,13 +1,19 @@
 package clue.less
 
 class Player {
+	
+	static belongsTo = [gameState : GameState]
 
     static constraints = {
     }
 	
-	GameState game
+	long id
 	
 	Location location
 	
-	Card[] cards
+//	Card[] cards
+	
+	public Player(){
+		location = Location.HALL
+	}
 }

@@ -8,4 +8,9 @@ class CluelessService {
     def serviceMethod() {
 
     }
+	
+	GameState newGame(){
+		def game = new GameState()
+		return game
+	}
 }
