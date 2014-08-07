@@ -1,5 +1,5 @@
 package clue.less;
 
 public enum Suspect implements Card{
-	GREEN, MUSTARD, SCARLET
+	GREEN, MUSTARD, SCARLET, PLUM, PEACOCK, WHITE
 }
