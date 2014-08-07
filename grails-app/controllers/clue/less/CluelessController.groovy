@@ -1,12 +1,31 @@
 package clue.less
 
+/**
+ * Web Controller, web client uses REST based commands, the functions handle the REST requests
+ * and send responses. 
+ *
+ */
 class CluelessController {
 	
-	def cluelessService;
-
+	GameEngineService gameEngineService
+	
     def index() { }
 	
-	def createGame(){}
+	def createGame(){
+		gameEngineService.createGame()
+	}
+	
+	def listGames() {
+		gameEngineService.listGames()
+	}
+	
+	def joinGame(UUID, Player) {
+		
+	}
+	
+	def startGame(UUID) {
+		
+	}
 	
 	def gameState(UUID){}
 	
