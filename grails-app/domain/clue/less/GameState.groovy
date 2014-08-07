@@ -6,6 +6,10 @@ class GameState {
 	
 	long id
 	
+	static constraints = {
+	}
+	
+	// Having each player as an instance variable instead of an array, we simplify hibernate configuration to 0
 	Player player1
 	
 	Player player2
@@ -20,12 +24,6 @@ class GameState {
 
 	// used for getting the initial solution cards
 	Random random = new Random()
-
-	// TODO: Should this be hard coded?
-	static MAX_PLAYERS = 6
-		
-    static constraints = {
-    }
 	
 	/**
 	 * User name for the created game.
@@ -51,11 +49,25 @@ class GameState {
 	 * Card representing the winning suspect.
 	 */
 	Suspect solutionSuspect
-
+	
+	/**
+	 * Default constructor required by hibernate
+	 */
 	public GameState(){
-		solutionLocation = Location.HALL
-		solutionWeapon = Weapon.CANDLESTICK
-		solutionSuspect = Suspect.GREEN
+		generatePlayers()
+		generateRandomSolution()
+		name = "" + new Date()
+		gameStarted = false
+	}
+
+	public GameState(String gameName){
+		generatePlayers()
+		generateRandomSolution()		
+		name = gameName
+		gameStarted = false
+	}
+	
+	private void generatePlayers(){
 		player1 = new Player()
 		player2 = new Player()
 		player3 = new Player()
@@ -64,22 +76,16 @@ class GameState {
 		player6 = new Player()
 	}
 	
-	/**
-	 * Sets up the variables in the game state for a new game.
-	 * 
-	 * @param UUID - ID of the game state object
-	 * @param String - Common name of the game
-	 * @return
-	 */
-	def initialize(UUID gameId, String gameName) {
-		uuid = gameId
-		name = gameName
-		gameStarted = false
+	private void generateRandomSolution(){
 		// get a random card for the weapon solution
-		weapon = Weapon.getValue(random.between(0, Weapon.values().size))
+		solutionWeapon = Weapon.values()[random.nextInt(Weapon.values().size()-1)]
 		// get a random card for the location solution
-		location = Location.getValue(random.between(0, Location.values().size))
+		solutionLocation = Location.values()[random.nextInt(Location.values().size()-1)]
 		// get a random card for the suspect solution
-		weapon = Suspect.getValue(random.between(0, Suspect.values().size))
+		solutionSuspect = Suspect.values()[random.nextInt(Suspect.values().size()-1)]
+	}
+	
+	public Player[] getPlayers(){
+		return [player1, player2, player3, player4, player5, player6]
 	}
 }
