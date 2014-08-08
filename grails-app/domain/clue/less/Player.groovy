@@ -5,6 +5,7 @@ class Player {
 	static belongsTo = [gameState : GameState]
 
     static constraints = {
+			gameState lazy: false
     }
 	
 	long id

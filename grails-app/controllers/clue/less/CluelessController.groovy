@@ -36,4 +36,9 @@ class CluelessController {
 	def disprove(UUID, player, card) {}
 	
 	def accuse(UUID, player, suspect, location, weapon){}
+	
+	protected GameState getGameStateFromPlayer(long playerID){
+		Player player = Player.findById(playerID)
+		return player.gameState
+	}
 }
