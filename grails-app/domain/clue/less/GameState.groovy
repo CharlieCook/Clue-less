@@ -67,8 +67,6 @@ class GameState {
 	 * Default constructor required by hibernate
 	 */
 	public GameState(){
-		createGame()
-		return
 	}
 
 	
@@ -76,8 +74,7 @@ class GameState {
 		generateRandomSolution()
 		this.name = name?:""+new Date()
 		gameStarted = false
-		generatePlayers()
-		return this;
+		return this
 	}
 	
 	private void generateRandomSolution(){
@@ -91,11 +88,23 @@ class GameState {
 	
 	private void generatePlayers(){
 		player1 = new Player()
+		player1.gameState = this
+		player1.save()
 		player2 = new Player()
+		player2.gameState = this
+		player2.save()
 		player3 = new Player()
+		player3.gameState = this
+		player3.save()
 		player4 = new Player()
+		player4.gameState = this
+		player4.save()
 		player5 = new Player()
+		player5.gameState = this
+		player5.save()
 		player6 = new Player()
+		player6.gameState = this
+		player6.save()
 	}
 	
 	public Player claimSeat(){

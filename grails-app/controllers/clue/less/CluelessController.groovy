@@ -19,6 +19,7 @@ class CluelessController {
 		GameState game = new GameState()
 		game.createGame(name)
 		game.save()
+		game.generatePlayers()
 		log.info("Created game: " + game.id)
 		return [game: game]
 	}
@@ -31,11 +32,10 @@ class CluelessController {
 		return [games: games]
 	}
 	
-	def joinGame(gameId) {
+	def joinGame(long gameId) {
 		GameState game = GameState.findById(gameId)
 		try{
 			Player player = game.claimSeat()
-			
 			return [game: game, player: player]
 		} catch (GameFullException e){
 			response.status = 410 //Resource 'Gone'

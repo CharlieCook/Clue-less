@@ -1,14 +1,9 @@
 package clue.less
 
 class Player {
-	
-	static belongsTo = [gameState : GameState]
-
-    static constraints = {
-			gameState lazy: false
-    }
-	
 	long id
+	
+	GameState gameState
 	
 	boolean claimed = false
 	
