@@ -11,23 +11,28 @@ class CluelessController {
 	
     def index() { }
 	
-	def createGame(){
-		gameEngineService.createGame()
+	def createGame(String name){
+		GameState game = new GameState(name)
+		game.save()
+		return game.player1.id
 	}
 	
 	def listGames() {
-		gameEngineService.listGames()
+		def games = GameState.findAllWhere(gameStarted:false)
+		return games;
 	}
 	
-	def joinGame(UUID, Player) {
+	def joinGame(gameId) {
 		
 	}
 	
-	def startGame(UUID) {
+	def startGame(id) {
 		
 	}
 	
-	def gameState(UUID){}
+	def gameState(id){
+		return getGameStateFromPlayer(id)
+	}
 	
 	def move(UUID, player, location){}
 	

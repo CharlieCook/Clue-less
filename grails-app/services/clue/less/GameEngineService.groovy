@@ -131,25 +131,6 @@ class GameEngineService {
 	}
 	
 	/**
-	 * Creates a new game with the given name.
-	 * @param String - Name of the new game
-	 * @return Game data of the new game
-	 */
-	def createGame(String name) {
-		def uuid = UUID.randomUUID()
-		while(GameState.findByUUID(uuid) != null) {
-			uuid = UUID.randomUUID()
-		}
-		// create the new game state
-		GameState newGame
-		newGame.initalize(uuid, name)
-		
-		// Store the new game
-		// TODO: Should this be 'byUUID'?
-		GameState.addByGameState(newGame)
-	}
-	
-	/**
 	 * Handles a player trying to join a game
 	 * @param game - ID of the game
 	 * @param player - ID of the player
