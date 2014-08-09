@@ -17,11 +17,13 @@ class GameEngineServiceSpec extends Specification {
 
     void "test corner office detect"() {
 		when:
-			def conservatory = Location.CONSERVATORY
-			def kitchen = Location.KITCHEN
-			def lounge = Location.LOUNGE
-			def study = Location.STUDY
-			def hall = Location.HALL
+			GameEngineService service = new GameEngineService()
+		
+			Location conservatory = new Location(Location.Locations.CONSERVATORY)
+			Location kitchen = new Location(Location.Locations.KITCHEN)
+			Location lounge = new Location(Location.Locations.LOUNGE)
+			Location study = new Location(Location.Locations.STUDY)
+			Location hall = new Location(Location.Locations.HALL)
 		then:
 			assertTrue("Conservatory should be a corner room", service.isCornerRoom(conservatory))
 			assertTrue("Kitchen should be a corner room", service.isCornerRoom(kitchen))

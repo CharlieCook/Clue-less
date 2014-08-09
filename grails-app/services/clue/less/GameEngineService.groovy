@@ -73,10 +73,10 @@ class GameEngineService {
 	 * Simply checks if the location card is a corner office
 	 */
 	def isCornerRoom(Location location) {
-		if(location == Location.KITCHEN ||
-			location == Location.STUDY ||
-			location == Location.CONSERVATORY ||
-			location == Location.LOUNGE) {
+		if(location.getCurrentLocation() == Locations.KITCHEN ||
+			location.getCurrentLocation() == Locations.STUDY ||
+			location.getCurrentLocation() == Locations.CONSERVATORY ||
+			location.getCurrentLocation() == Locations.LOUNGE) {
 			return true
 		}
 		return false
@@ -91,7 +91,7 @@ class GameEngineService {
 	 */
 	def isHallwayOccupied(GameState gameState, Location location) {
 		// Make sure the location is a hallway
-		if(!isHallway(location)) {
+		if(!location.isHallway()) {
 			log.info("Location: " + location.value() + " is not a hallway")
 			return false
 		}
@@ -106,30 +106,6 @@ class GameEngineService {
 	}
 	
 	/**
-	 * Simple utility for detecting if a location is a hallway.
-	 * 
-	 * @param location - Location to check if it is a hallway
-	 * @return Indication if the location is a hallway
-	 */
-	def isHallway(Location location) {
-		if(location.equals(Location.HALLWAY1) ||
-			location.equals(Location.HALLWAY2) ||
-			location.equals(Location.HALLWAY3) ||
-			location.equals(Location.HALLWAY4) ||
-			location.equals(Location.HALLWAY5) ||
-			location.equals(Location.HALLWAY6) ||
-			location.equals(Location.HALLWAY7) ||
-			location.equals(Location.HALLWAY8) ||
-			location.equals(Location.HALLWAY9) ||
-			location.equals(Location.HALLWAY10) ||
-			location.equals(Location.HALLWAY11) ||
-			location.equals(Location.HALLWAY12)) {
-			return true
-		}
-		return false
-	}
-	
-	/**
 	 * Handles a player making an accusation.
 	 * 
 	 * @param Player - player making accusation
@@ -138,8 +114,19 @@ class GameEngineService {
 	 * @param Location - guessed location
 	 * @return Success or failure
 	 */
-	def makeAccusation(Player, Suspect, Weapon, Location) {
-		
+	def makeAccusation(Player player, Suspect guessedSuspect, 
+			Weapon guessedWeapon, Location guessedLocation) {
+		GameState gameState = player.gameState
+		if(gameState.solutionSuspect.equals(guessedSuspect) &&
+			gameState.solutionWeapon.equals(guessedWeapon) &&
+			gameState.solutionLocation.equals(guessedLocation)) {
+			// TODO: Inform all players of the winner
+		} else {
+			player.accusationIncorrect = true;
+			// TODO: Update game state
+			// TODO: Inform the player their accusation is incorrect and 
+			// they will be skipped from moving and guessing
+		}
 	}
 	
 	/**

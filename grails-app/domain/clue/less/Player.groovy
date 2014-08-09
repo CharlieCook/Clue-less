@@ -18,12 +18,12 @@ class Player {
 	 * Flag indicating the player has made an incorrect accusation.
 	 * Player can't move or make guesses, only show their cards to other players
 	 */
-	boolean accusationIncorrect
+	boolean accusationIncorrect = false
 	
 //	Card[] cards
 	
 	public Player(){
-		location = Location.HALL
+		location = new Location()
 		suspect = Suspect.SCARLET
 	}
 }
