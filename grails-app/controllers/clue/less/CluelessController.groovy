@@ -52,7 +52,11 @@ class CluelessController {
 		return [game: getGameStateFromPlayer(playerId)]
 	}
 	
-	def move(UUID, player, location){}
+	def move(long playerId, Location location){
+		log.info("Trying to move player: " + playerId)
+		Player player = Player.findById(playerID)
+		gameEngineService.movePlayer(player, location)
+	}
 	
 	def suggest(UUID, player, suspect, location, weapon){}
 	
