@@ -51,7 +51,9 @@ class CluelessController {
 		return [game: getGameStateFromPlayer(playerId)]
 	}
 	
-	def move(UUID, player, location){}
+	def move(long playerId, Location location){
+		log.info("Trying to move player")
+	}
 	
 	def suggest(UUID, player, suspect, location, weapon){}
 	

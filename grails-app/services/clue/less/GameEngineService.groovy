@@ -1,5 +1,7 @@
 package clue.less
 
+import org.apache.commons.logging.LogFactory;
+
 import grails.transaction.Transactional
 
 /**
@@ -9,6 +11,8 @@ import grails.transaction.Transactional
 @Transactional
 class GameEngineService {
 
+	private static final log = LogFactory.getLog(this)
+	
     def serviceMethod() {
 
     }
@@ -43,8 +47,9 @@ class GameEngineService {
 		for(Player gamePlayer : gameState.getPlayers()) {
 			if(gamePlayer.id != currentPlayer.id) {
 				// Don't have to compare to self
-				// TODO: If moveing to hallway make sure it is empty
+				// TODO: If moving to hallway make sure it is empty
 				if(hallwayOccupied == true && !isCornerOffice(currentPlayer.location)) {
+					log.info("Player cannot move from room")
 					// TODO: Inform client that move is not ok
 				} else {
 					for(Player player : gameState.getPlayers()) {
@@ -118,35 +123,6 @@ class GameEngineService {
 	def nextTurn(Player) {
 		// TODO: check if the player is in a room and can move
 		// TODO: Inform the player of their options
-	}
-	
-	/**
-	 * Lists all available games open to join.
-	 * @return list of game names a player can join
-	 */
-	def listGames() {
-		GameState[] allGames = GameState.findAll()
-		// TODO: Pass this info up to the client
-		return allGames
-	}
-	
-	/**
-	 * Handles a player trying to join a game
-	 * @param game - ID of the game
-	 * @param player - ID of the player
-	 * @return Success on joining a game or not
-	 */
-	def joinGame(GameState gameState, Player player) {
-		if(gameState != null) {
-			// TODO: Should this be hard coded?
-			if(gameState.getPlayers().size < 6) {
-				gameState.players.add(player)
-			} else {
-				// TODO: Inform player game is full
-			}
-		} else {
-			// TODO: Inform player UUID is not a valid game.
-		}
 	}
 	
 	/**
