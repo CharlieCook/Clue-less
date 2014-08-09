@@ -7,6 +7,7 @@ import spock.lang.Specification
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(GameState)
+@Mock(Player)
 class GameStateSpec extends Specification {
 
     def setup() {
@@ -37,6 +38,7 @@ class GameStateSpec extends Specification {
 	void "test Claim seat on new game"(){
 		given:
 			GameState game = new GameState()
+			game.generatePlayers()
 		
 		when:
 			Player player = game.claimSeat()
@@ -48,6 +50,7 @@ class GameStateSpec extends Specification {
 	void "test attempt to claim seat of full game"(){
 		given:
 			GameState game = new GameState()
+			game.generatePlayers()
 			game.claimSeat()
 			game.claimSeat()
 			game.claimSeat()
