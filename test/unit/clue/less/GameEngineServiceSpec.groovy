@@ -19,11 +19,11 @@ class GameEngineServiceSpec extends Specification {
 		when:
 			GameEngineService service = new GameEngineService()
 		
-			Location conservatory = new Location(Location.Locations.CONSERVATORY)
-			Location kitchen = new Location(Location.Locations.KITCHEN)
-			Location lounge = new Location(Location.Locations.LOUNGE)
-			Location study = new Location(Location.Locations.STUDY)
-			Location hall = new Location(Location.Locations.HALL)
+			Location conservatory =Location.CONSERVATORY
+			Location kitchen = Location.KITCHEN
+			Location lounge =Location.LOUNGE
+			Location study = Location.STUDY
+			Location hall = Location.HALL
 		then:
 			assertTrue("Conservatory should be a corner room", service.isCornerRoom(conservatory))
 			assertTrue("Kitchen should be a corner room", service.isCornerRoom(kitchen))

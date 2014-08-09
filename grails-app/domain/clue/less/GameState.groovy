@@ -82,7 +82,7 @@ class GameState {
 		// get a random card for the weapon solution
 		solutionWeapon = Weapon.values()[random.nextInt(Weapon.values().size()-1)]
 		// get a random card for the location solution
-		solutionLocation.setCurrentLocation(Location.Locations.values()[random.nextInt(Location.Locations.values().size()-1)])
+		solutionLocation = Location.values()[random.nextInt(Location.getNonHallways().size()-1)]
 		// get a random card for the suspect solution
 		solutionSuspect = Suspect.values()[random.nextInt(Suspect.values().size()-1)]
 	}

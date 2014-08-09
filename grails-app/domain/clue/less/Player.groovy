@@ -6,7 +6,7 @@ class Player {
 	GameState gameState
 	
 	boolean claimed = false
-	
+
 	Location location
 	
 	/**
@@ -23,7 +23,7 @@ class Player {
 //	Card[] cards
 	
 	public Player(){
-		location = new Location()
+		location = Location.HALL
 		suspect = Suspect.SCARLET
 	}
 }
