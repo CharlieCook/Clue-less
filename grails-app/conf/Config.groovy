@@ -49,6 +49,9 @@ grails.resources.modules = {
 		resource url: '/css/gamestatus.css'
 		resource url: '/css/movementring.css'
 	}
+	listView{
+		resource url:'/css/listView.css'
+	}
 }
 
 // Legacy setting for codec used to encode data with ${}

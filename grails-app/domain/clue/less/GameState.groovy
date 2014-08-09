@@ -67,6 +67,7 @@ class GameState {
 	 * Default constructor required by hibernate
 	 */
 	public GameState(){
+		createGame(""+new Date())
 	}
 
 	

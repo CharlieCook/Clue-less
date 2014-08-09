@@ -1,5 +1,5 @@
 package clue.less;
 
-public enum Suspect implements Card{
+public enum Suspect{
 	GREEN, MUSTARD, SCARLET, PLUM, PEACOCK, WHITE
 }

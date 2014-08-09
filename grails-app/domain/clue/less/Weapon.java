@@ -1,6 +1,6 @@
 package clue.less;
 
-public enum Weapon implements Card{
+public enum Weapon{
 	CANDLESTICK, WRENCH, PIPE, REVOLVER, ROPE, KNIFE
 
 }
