@@ -45,4 +45,21 @@ class GameStateSpec extends Specification {
 		then:
 			assertNotNull("Game did not have Player 1", player)
 	}
+	
+	void "test attempt to claim seat of full game"(){
+		given:
+			GameState game = new GameState()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+		
+		when:
+			game.claimSeat()
+			
+		then:
+			thrown(Exception)
+	}
 }

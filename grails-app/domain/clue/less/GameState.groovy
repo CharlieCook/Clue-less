@@ -104,7 +104,7 @@ class GameState {
 				return p
 			}
 		}
-		return null
+		throw new Exception("No Seats available")
 	}
 	
 	public Player[] getPlayers(){
