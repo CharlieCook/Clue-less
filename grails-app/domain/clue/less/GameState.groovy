@@ -11,6 +11,12 @@ class GameState {
 	long id
 	
 	static constraints = {
+		player1 nullable: true
+		player2 nullable: true
+		player3 nullable: true
+		player4 nullable: true
+		player5 nullable: true
+		player6 nullable: true
 	}
 	
 	// Having each player as an instance variable instead of an array, we simplify hibernate configuration to 0
@@ -58,17 +64,28 @@ class GameState {
 	 * Default constructor required by hibernate
 	 */
 	public GameState(){
-		generatePlayers()
-		generateRandomSolution()
-		name = "" + new Date()
-		gameStarted = false
+		createGame(""+ new Date())
 	}
 
 	public GameState(String gameName){
-		generatePlayers()
-		generateRandomSolution()		
-		name = gameName
+		createGame(gameName)
+	}
+	
+	public GameState createGame(String name){
+		generateRandomSolution()
+		this.name = name
 		gameStarted = false
+		generatePlayers()
+		return this;
+	}
+	
+	private void generateRandomSolution(){
+		// get a random card for the weapon solution
+		solutionWeapon = Weapon.values()[random.nextInt(Weapon.values().size()-1)]
+		// get a random card for the location solution
+		solutionLocation = Location.values()[random.nextInt(Location.values().size()-1)]
+		// get a random card for the suspect solution
+		solutionSuspect = Suspect.values()[random.nextInt(Suspect.values().size()-1)]
 	}
 	
 	private void generatePlayers(){
@@ -80,13 +97,14 @@ class GameState {
 		player6 = new Player()
 	}
 	
-	private void generateRandomSolution(){
-		// get a random card for the weapon solution
-		solutionWeapon = Weapon.values()[random.nextInt(Weapon.values().size()-1)]
-		// get a random card for the location solution
-		solutionLocation = Location.values()[random.nextInt(Location.values().size()-1)]
-		// get a random card for the suspect solution
-		solutionSuspect = Suspect.values()[random.nextInt(Suspect.values().size()-1)]
+	public Player claimSeat(){
+		for(Player p: getPlayers()){
+			if(!p.claimed){
+				p.claimed = true
+				return p
+			}
+		}
+		return null
 	}
 	
 	public Player[] getPlayers(){

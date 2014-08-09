@@ -1,5 +1,7 @@
 package clue.less
 
+import org.apache.commons.logging.LogFactory
+
 /**
  * Web Controller, web client uses REST based commands, the functions handle the REST requests
  * and send responses. 
@@ -9,16 +11,22 @@ class CluelessController {
 	
 	GameEngineService gameEngineService
 	
+	private static final log = LogFactory.getLog(this)
+	
     def index() { }
 	
 	def createGame(String name){
 		GameState game = new GameState(name)
 		game.save()
-		return game.player1.id
+		log.info("Created game: " + game.id)
+		return game.claimSeat().id
 	}
 	
-	def listGames() {
-		def games = GameState.findAllWhere(gameStarted:false)
+	def listGames(int max, int offset) {
+		if(max == null || max == 0) max = 10
+		if(offset == null) offset = 0
+		def games = GameState.findAllByGameStarted(false,
+			[max:max, offset: offset, sort: "name", order:"asc"])
 		return games;
 	}
 	
@@ -43,6 +51,7 @@ class CluelessController {
 	def accuse(UUID, player, suspect, location, weapon){}
 	
 	protected GameState getGameStateFromPlayer(long playerID){
+		log.info("finding game for player: " + playerID)
 		Player player = Player.findById(playerID)
 		return player.gameState
 	}

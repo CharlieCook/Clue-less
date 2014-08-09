@@ -10,6 +10,8 @@ class Player {
 	
 	long id
 	
+	boolean claimed = false
+	
 	Location location
 	
 	/**
