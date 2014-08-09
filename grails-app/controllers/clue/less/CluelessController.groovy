@@ -29,7 +29,8 @@ class CluelessController {
 		if(offset == null) offset = 0
 		def games = GameState.findAllByGameStarted(false,
 			[max:max, offset: offset, sort: "name", order:"asc"])
-		return [games: games]
+		def gameCount = GameState.countByGameStarted(false)
+		return [games: games, gameCount: gameCount, max: max, offset:offset]
 	}
 	
 	def joinGame(long gameId) {

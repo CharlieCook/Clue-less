@@ -8,6 +8,7 @@
 	<g:form action="createGame">Create New Game: <input type="text" name="name">
 		<g:submitButton name="Create" />
 	</g:form>
+	<g:paginate total="${gameCount}" action="listGames" max="${max}" offset="${offset}"/>
 	<table class="gameList">
 		<col width="1*">
 		<col width="4*">
