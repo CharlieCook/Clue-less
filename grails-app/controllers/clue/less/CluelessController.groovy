@@ -16,10 +16,10 @@ class CluelessController {
     def index() { }
 	
 	def createGame(String name){
-		GameState game = new GameState(name)
+		GameState game = new GameState()
 		game.save()
 		log.info("Created game: " + game.id)
-		return game.claimSeat().id
+		return [game: game]
 	}
 	
 	def listGames(int max, int offset) {
@@ -27,13 +27,14 @@ class CluelessController {
 		if(offset == null) offset = 0
 		def games = GameState.findAllByGameStarted(false,
 			[max:max, offset: offset, sort: "name", order:"asc"])
-		return games;
+		return [games: games]
 	}
 	
 	def joinGame(id) {
 		GameState game = GameState.findById(id)
 		try{
-			return game.claimSeat().id
+			Player player = game.claimSeat()
+			return [game: game, player: player]
 		} catch (GameFullException e){
 			response.status = 410 //Resource 'Gone'
 			return

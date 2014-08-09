@@ -26,12 +26,12 @@ class CluelessControllerTests extends GroovyTestCase  {
 			assertEquals("Wrong game was returned from player ID", game, foundGame)
     }
 	
-	void "test create game returns valid player id"(){
+	void "test create game returns valid game id"(){
 		when:
-			long playerId = controller.createGame()
+			long gameId = controller.createGame().game.id
 		
 		then:
-			assertNotNull("GameState seems to not valid", controller.getGameStateFromPlayer(playerId))			 
+			assertNotNull("GameState seems to not valid", gameId)			 
 	}
 	
 	void "test list game returns a list of games"(){
@@ -44,7 +44,7 @@ class CluelessControllerTests extends GroovyTestCase  {
 			game3.save()
 		
 		when:
-			def games = controller.listGames()
+			def games = controller.listGames().games
 			
 		then:
 			assertEquals("Controller returned the wrong number of games", 3, games.size())
@@ -61,7 +61,7 @@ class CluelessControllerTests extends GroovyTestCase  {
 			game3.save()
 		
 		when:
-			def games = controller.listGames(2, 0)
+			def games = controller.listGames(2, 0).games
 			
 		then:
 			assertEquals("Controller listGames did not respect the max paramenter", 2, games.size())
@@ -77,7 +77,7 @@ class CluelessControllerTests extends GroovyTestCase  {
 			game3.save()
 		
 		when:
-			def games = controller.listGames(5, 1)
+			def games = controller.listGames(5, 1).games
 			
 		then:
 			assertEquals("Controller listGames did not respect the max paramenter", game2.name, games[0].name)
@@ -86,10 +86,10 @@ class CluelessControllerTests extends GroovyTestCase  {
 	void "test Join open game"(){
 		given:
 			controller.createGame();
-			def gameId = controller.listGames()[0].id
+			def gameId = controller.listGames().games[0].id
 		
 		when:
-			long playerId = controller.joinGame(gameId)
+			long playerId = controller.joinGame(gameId).player.id
 		
 		then:
 			assertEquals("Player Id did not attach to game", gameId, controller.getGameStateFromPlayer(playerId).id)
@@ -98,7 +98,8 @@ class CluelessControllerTests extends GroovyTestCase  {
 	void "test Join full game"(){
 		given:
 			controller.createGame();
-			def gameId = controller.listGames()[0].id
+			def gameId = controller.listGames().games[0].id
+			controller.joinGame(gameId)
 			controller.joinGame(gameId)
 			controller.joinGame(gameId)
 			controller.joinGame(gameId)

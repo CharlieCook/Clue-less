@@ -20,6 +20,8 @@ class GameState {
 		player6 nullable: true
 	}
 	
+	static transients = ['playerCount']
+	
 	// Having each player as an instance variable instead of an array, we simplify hibernate configuration to 0
 	Player player1
 	
@@ -68,9 +70,9 @@ class GameState {
 		createGame(""+ new Date())
 	}
 
-	public GameState(String gameName){
-		createGame(gameName)
-	}
+//	public GameState(String gameName){
+//		createGame(gameName)
+//	}
 	
 	public GameState createGame(String name){
 		generateRandomSolution()
@@ -106,6 +108,16 @@ class GameState {
 			}
 		}
 		throw new GameFullException("No Seats available")
+	}
+	
+	int getPlayerCount(){
+		int x = 0
+		for(Player p: getPlayers()){
+			if(p.claimed){
+				x++
+			}
+		}
+		return x
 	}
 	
 	public Player[] getPlayers(){
