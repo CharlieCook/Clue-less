@@ -43,25 +43,27 @@ class GameEngineService {
 	 * @param Player - player that is attempting to move
 	 * @return
 	 */
-	def movePlayer(Player currentPlayer, GameState gameState) {
+	def movePlayer(Player currentPlayer, Location location) {
+		if(currentPlayer.location.equals(location)) {
+			log.info("Cannot move to the same location")
+			// TODO: inform player you cannot move to the same location
+		}
+		
+		GameState gameState = currentPlayer.gameState
 		for(Player gamePlayer : gameState.getPlayers()) {
+			// don't compare to self
 			if(gamePlayer.id != currentPlayer.id) {
-				// Don't have to compare to self
 				// TODO: If moving to hallway make sure it is empty
 				if(hallwayOccupied == true && !isCornerOffice(currentPlayer.location)) {
 					log.info("Player cannot move from room")
 					// TODO: Inform client that move is not ok
 				} else {
-					for(Player player : gameState.getPlayers()) {
-						// update the location
-						if(player.id == currentPlayer.id) {
-							player.location = currentPlayer.location
-						}
-						// store the update
-						GameState.addByGameState(gameState)
-						// TODO: Inform the user the move was a success
-						// TODO: Inform the next player it is there turn
-					}
+					// update the player's location
+					player.location = location
+					// TODO: Does this save off the game state correctly?
+					gameState.save()
+					// TODO: Update all clients with the new game state
+					// TODO: Inform the next player it is their turn, is this the controller's job?
 				}
 			}
 		}
@@ -75,6 +77,53 @@ class GameEngineService {
 			location == Location.STUDY ||
 			location == Location.CONSERVATORY ||
 			location == Location.LOUNGE) {
+			return true
+		}
+		return false
+	}
+	
+	/**
+	 * Checks if the hallway given is occupied.
+	 * 
+	 * @param player - Player trying to move to a hallway
+	 * @param location - Hallway trying to move to
+	 * @return Flag indicating if the hallway given is occupied
+	 */
+	def isHallwayOccupied(GameState gameState, Location location) {
+		// Make sure the location is a hallway
+		if(!isHallway(location)) {
+			log.info("Location: " + location.value() + " is not a hallway")
+			return false
+		}
+		// loop through all the players and see if any are in the hallway
+		for(Player player : gameState.getPlayers()) {
+			if(player.location.equals(location)) {
+				return true
+			}
+		}
+		// hallway is not occupied
+		return false
+	}
+	
+	/**
+	 * Simple utility for detecting if a location is a hallway.
+	 * 
+	 * @param location - Location to check if it is a hallway
+	 * @return Indication if the location is a hallway
+	 */
+	def isHallway(Location location) {
+		if(location.equals(Location.HALLWAY1) ||
+			location.equals(Location.HALLWAY2) ||
+			location.equals(Location.HALLWAY3) ||
+			location.equals(Location.HALLWAY4) ||
+			location.equals(Location.HALLWAY5) ||
+			location.equals(Location.HALLWAY6) ||
+			location.equals(Location.HALLWAY7) ||
+			location.equals(Location.HALLWAY8) ||
+			location.equals(Location.HALLWAY9) ||
+			location.equals(Location.HALLWAY10) ||
+			location.equals(Location.HALLWAY11) ||
+			location.equals(Location.HALLWAY12)) {
 			return true
 		}
 		return false
@@ -139,7 +188,6 @@ class GameEngineService {
 			for( Player player : gameState.getPlayers()) {
 				if(player.suspect == Suspect.SCARLET) {
 					// TODO: Inform that player it is their turn, scarlet always goes first
-					
 				}
 			}
 			// TODO: Send out an error message?  We should not have gotten here? Scarlet should be in the game	
