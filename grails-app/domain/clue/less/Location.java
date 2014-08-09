@@ -28,6 +28,21 @@ public enum Location {
 			return false;
 	}
 
+	/**
+	 * Checks if the location is a corner office, which has a secret path.
+	 * @param location - Location being checked if it is a corner room
+	 * @return Indicates if the location is a corner room of not
+	 */
+	public static boolean isCornerRoom(Location location) {
+		if(location == Location.KITCHEN ||
+				location == Location.STUDY ||
+				location == Location.CONSERVATORY ||
+				location == Location.LOUNGE) {
+				return true;
+			}
+			return false;
+	}
+	
 	public static Location[] getNonHallways(){
 		Location[] ret = new Location[]{
 				Location.HALL, Location.LIBRARY, Location.KITCHEN, 

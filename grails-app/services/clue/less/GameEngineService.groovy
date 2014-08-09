@@ -54,7 +54,7 @@ class GameEngineService {
 			// don't compare to self
 			if(gamePlayer.id != currentPlayer.id) {
 				// TODO: If moving to hallway make sure it is empty
-				if(hallwayOccupied == true && !isCornerOffice(currentPlayer.location)) {
+				if(isHallwayOccupied && !Location.isCornerRoom(location)) {
 					log.info("Player cannot move from room")
 					// TODO: Inform client that move is not ok
 				} else {
@@ -67,19 +67,6 @@ class GameEngineService {
 				}
 			}
 		}
-	}
-	
-	/**
-	 * Simply checks if the location card is a corner office
-	 */
-	def isCornerRoom(Location location) {
-		if(location.getCurrentLocation() == Locations.KITCHEN ||
-			location.getCurrentLocation() == Locations.STUDY ||
-			location.getCurrentLocation() == Locations.CONSERVATORY ||
-			location.getCurrentLocation() == Locations.LOUNGE) {
-			return true
-		}
-		return false
 	}
 	
 	/**
