@@ -2,6 +2,7 @@
 <head>
 </head>
 <body>
+<g:form action="createGame">Create New Game: <input type="text" name="name"> <g:submitButton name="Create"/></g:form>
 	<table>
 		<g:each in="${games}">
 			<tr>
