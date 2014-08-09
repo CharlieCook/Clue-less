@@ -35,6 +35,7 @@ class CluelessController {
 		GameState game = GameState.findById(gameId)
 		try{
 			Player player = game.claimSeat()
+			
 			return [game: game, player: player]
 		} catch (GameFullException e){
 			response.status = 410 //Resource 'Gone'

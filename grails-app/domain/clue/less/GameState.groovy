@@ -67,11 +67,10 @@ class GameState {
 	 * Default constructor required by hibernate
 	 */
 	public GameState(){
+		createGame()
+		return
 	}
 
-//	public GameState(String gameName){
-//		createGame(gameName)
-//	}
 	
 	public GameState createGame(String name){
 		generateRandomSolution()

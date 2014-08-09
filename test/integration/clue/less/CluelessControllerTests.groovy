@@ -69,11 +69,14 @@ class CluelessControllerTests extends GroovyTestCase  {
 	
 	void "test list game returns offset specified"(){
 		given:
-			GameState game1 = new GameState("A")
+			GameState game1 = new GameState()
+			game1.name = "A"
 			game1.save()
-			GameState game2 = new GameState("B")
+			GameState game2 = new GameState()
+			game2.name = "B"
 			game2.save()
-			GameState game3 = new GameState("C")
+			GameState game3 = new GameState()
+			game3.name="C"
 			game3.save()
 		
 		when:
