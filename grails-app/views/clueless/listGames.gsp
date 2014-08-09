@@ -8,7 +8,7 @@
 	<g:form action="createGame">Create New Game: <input type="text" name="name">
 		<g:submitButton name="Create" />
 	</g:form>
-	<table>
+	<table class="gameList">
 		<col width="1*">
 		<col width="4*">
 		<col width="2*">

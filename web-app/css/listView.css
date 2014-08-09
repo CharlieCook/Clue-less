@@ -1,5 +1,16 @@
 @CHARSET "ISO-8859-1";
 
-tr:nth-child(even) {
+.gameList tr:nth-child(even) {
     background-color: #FFD1B2;
 }
+
+.gamelist tr:first-of-type td{
+	border-bottom-color: black;
+    border-bottom-style: solid;
+}
+
+.gameList{
+	border-collapse: collapse;
+	width: 100%;
+}
+
