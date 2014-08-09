@@ -82,4 +82,33 @@ class CluelessControllerTests extends GroovyTestCase  {
 		then:
 			assertEquals("Controller listGames did not respect the max paramenter", game2.name, games[0].name)
 	}
+	
+	void "test Join open game"(){
+		given:
+			controller.createGame();
+			def gameId = controller.listGames()[0].id
+		
+		when:
+			long playerId = controller.joinGame(gameId)
+		
+		then:
+			assertEquals("Player Id did not attach to game", gameId, controller.getGameStateFromPlayer(playerId).id)
+	}
+	
+	void "test Join full game"(){
+		given:
+			controller.createGame();
+			def gameId = controller.listGames()[0].id
+			controller.joinGame(gameId)
+			controller.joinGame(gameId)
+			controller.joinGame(gameId)
+			controller.joinGame(gameId)
+			controller.joinGame(gameId)
+		
+		when:
+			controller.joinGame(gameId)
+		
+		then:
+			assertEquals("Controller did not return a 410 for a gone seat", 410, controller.response.status)
+	}
 }

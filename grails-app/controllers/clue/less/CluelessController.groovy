@@ -30,8 +30,14 @@ class CluelessController {
 		return games;
 	}
 	
-	def joinGame(gameId) {
-		
+	def joinGame(id) {
+		GameState game = GameState.findById(id)
+		try{
+			return game.claimSeat().id
+		} catch (GameFullException e){
+			response.status = 410 //Resource 'Gone'
+			return
+		}
 	}
 	
 	def startGame(id) {

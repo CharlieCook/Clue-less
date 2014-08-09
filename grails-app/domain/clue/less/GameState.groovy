@@ -1,5 +1,6 @@
 package clue.less
 
+import clue.less.GameFullException
 import clue.less.Player
 
 class GameState {	
@@ -104,7 +105,7 @@ class GameState {
 				return p
 			}
 		}
-		throw new Exception("No Seats available")
+		throw new GameFullException("No Seats available")
 	}
 	
 	public Player[] getPlayers(){

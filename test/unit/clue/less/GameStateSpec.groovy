@@ -60,6 +60,6 @@ class GameStateSpec extends Specification {
 			game.claimSeat()
 			
 		then:
-			thrown(Exception)
+			thrown(GameFullException)
 	}
 }
