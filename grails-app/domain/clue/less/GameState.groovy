@@ -67,7 +67,6 @@ class GameState {
 	 * Default constructor required by hibernate
 	 */
 	public GameState(){
-		createGame(""+ new Date())
 	}
 
 //	public GameState(String gameName){
@@ -76,7 +75,7 @@ class GameState {
 	
 	public GameState createGame(String name){
 		generateRandomSolution()
-		this.name = name
+		this.name = name?:""+new Date()
 		gameStarted = false
 		generatePlayers()
 		return this;

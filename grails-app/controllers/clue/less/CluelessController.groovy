@@ -17,6 +17,7 @@ class CluelessController {
 	
 	def createGame(String name){
 		GameState game = new GameState()
+		game.createGame(name)
 		game.save()
 		log.info("Created game: " + game.id)
 		return [game: game]
@@ -30,8 +31,8 @@ class CluelessController {
 		return [games: games]
 	}
 	
-	def joinGame(id) {
-		GameState game = GameState.findById(id)
+	def joinGame(gameId) {
+		GameState game = GameState.findById(gameId)
 		try{
 			Player player = game.claimSeat()
 			return [game: game, player: player]

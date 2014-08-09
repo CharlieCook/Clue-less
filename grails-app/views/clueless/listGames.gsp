@@ -2,8 +2,15 @@
 <head>
 </head>
 <body>
-<g:each in="${games}">
-${it.id}, ${it.name}, ${it.playerCount}</br>
-</g:each>
+	<table>
+		<g:each in="${games}">
+			<tr>
+				<td>${it.id}</td>
+				<td>${it.name}</td>
+				<td>${it.playerCount}</td>
+				<td><g:link action='joinGame' params="${[game: it.id]}">Join Game</g:link></td>
+			</tr>
+		</g:each>
+	</table>
 </body>
 </html>
