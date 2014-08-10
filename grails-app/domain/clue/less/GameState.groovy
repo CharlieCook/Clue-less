@@ -87,23 +87,26 @@ class GameState {
 		solutionSuspect = Suspect.values()[random.nextInt(Suspect.values().size()-1)]
 	}
 	
+	/**
+	 * Generates the players and assigns them a number 1 through 6 for which suspect they are
+	 */
 	private void generatePlayers(){
-		player1 = new Player()
+		player1 = new Player(1)
 		player1.gameState = this
 		player1.save()
-		player2 = new Player()
+		player2 = new Player(2)
 		player2.gameState = this
 		player2.save()
-		player3 = new Player()
+		player3 = new Player(3)
 		player3.gameState = this
 		player3.save()
-		player4 = new Player()
+		player4 = new Player(4)
 		player4.gameState = this
 		player4.save()
-		player5 = new Player()
+		player5 = new Player(5)
 		player5.gameState = this
 		player5.save()
-		player6 = new Player()
+		player6 = new Player(6)
 		player6.gameState = this
 		player6.save()
 	}
@@ -130,5 +133,47 @@ class GameState {
 	
 	public Player[] getPlayers(){
 		return [player1, player2, player3, player4, player5, player6]
+	}
+	
+	/**
+	 * Gets the player's number, it is used for getting the next player's turn
+	 * and finding out in order which player needs to reveal a card during a suggestion.
+	 * @param player - Player that needs its number found
+	 * @return 1 - 6 indicates the player number, -1 means that player id is NOT in this game state
+	 */
+	public int getPlayerNumber(Player player) {
+		if(player.id == player1.id) {
+			return 1
+		} else if(player.id == player2.id) {
+			return 2
+		} else if(player.id == player3.id) {
+			return 3
+		} else if(player.id == player4.id) {
+			return 4
+		} else if(player.id == player5.id) {
+			return 5
+		} else if(player.id == player6.id) {
+			return 6
+		}
+		return -1 
+	}
+	
+	/**
+	 * Simply finds the player matching the suspect to move them.
+	 * @param suspect - Suspect we are matching to a player
+	 * @return Player matching the suspect
+	 */
+	public Player findMatchingPlayer(Suspect suspect) {
+		if(player1.suspect.equals(suspect)) 
+			return player1
+		if(player2.suspect.equals(suspect))
+			return player2
+		if(player3.suspect.equals(suspect))
+			return player3
+		if(player4.suspect.equals(suspect))
+			return player4
+		if(player5.suspect.equals(suspect))
+			return player5
+		return player6
 	}
 }

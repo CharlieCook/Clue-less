@@ -12,19 +12,17 @@ import grails.transaction.Transactional
 class GameEngineService {
 
 	private static final log = LogFactory.getLog(this)
-	
-    def serviceMethod() {
 
-    }
-	
+	def serviceMethod() {
+	}
+
 	/**
 	 * Start up the game engine.
 	 * @return
 	 */
 	def intialize() {
-		
 	}
-	
+
 	/**
 	 * Update the game state with the new game state
 	 * @param UUID - ID of the game
@@ -36,7 +34,7 @@ class GameEngineService {
 		GameState.addByGameState(newState)
 		// TODO: Broadcast the updated state to all players
 	}
-	
+
 	/**
 	 * Moves the corresponding player
 	 * 
@@ -48,13 +46,13 @@ class GameEngineService {
 			log.info("Cannot move to the same location")
 			// TODO: inform player you cannot move to the same location
 		}
-		
+
 		GameState gameState = currentPlayer.gameState
 		for(Player gamePlayer : gameState.getPlayers()) {
 			// don't compare to self
 			if(gamePlayer.id != currentPlayer.id) {
-				// TODO: If moving to hallway make sure it is empty
-				if(isHallwayOccupied && !Location.isCornerRoom(location)) {
+				// TODO: This logic still needs work
+				if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
 					log.info("Player cannot move from room")
 					// TODO: Inform client that move is not ok
 				} else {
@@ -68,7 +66,7 @@ class GameEngineService {
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks if the hallway given is occupied.
 	 * 
@@ -91,7 +89,7 @@ class GameEngineService {
 		// hallway is not occupied
 		return false
 	}
-	
+
 	/**
 	 * Handles a player making an accusation.
 	 * 
@@ -101,21 +99,21 @@ class GameEngineService {
 	 * @param Location - guessed location
 	 * @return Success or failure
 	 */
-	def makeAccusation(Player player, Suspect guessedSuspect, 
+	def makeAccusation(Player player, Suspect guessedSuspect,
 			Weapon guessedWeapon, Location guessedLocation) {
 		GameState gameState = player.gameState
 		if(gameState.solutionSuspect.equals(guessedSuspect) &&
-			gameState.solutionWeapon.equals(guessedWeapon) &&
-			gameState.solutionLocation.equals(guessedLocation)) {
+		gameState.solutionWeapon.equals(guessedWeapon) &&
+		gameState.solutionLocation.equals(guessedLocation)) {
 			// TODO: Inform all players of the winner
 		} else {
 			player.accusationIncorrect = true;
 			// TODO: Update game state
-			// TODO: Inform the player their accusation is incorrect and 
+			// TODO: Inform the player their accusation is incorrect and
 			// they will be skipped from moving and guessing
 		}
 	}
-	
+
 	/**
 	 * Handles a player making a suggestion.
 	 * 
@@ -125,10 +123,43 @@ class GameEngineService {
 	 * @param Location - guessed location
 	 * @return Checks if another player has a card or returns that no one has a card
 	 */
-	def makeSuggestion(Player, Suspect, Weapon, Location) {
+	def makeSuggestion(Player guessingPlayer, Suspect suggestedSuspect,
+		Weapon suggestedWeapon, Location suggestedLocation) {
 		
+		GameState gameState = guessingPlayer.gameState
+		// run through the players in order and if they have a card that matches the guess inform them.
+		int playerIndex = gameState.getPlayerNumber(guessingPLayer)
+		if(playerIndex == -1) {
+			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
+			// TODO: Error, this player should have a reference to the correct game state!
+		} else {
+			Player[] gamePlayers = gameState.getPlayers()
+			// required to check if we need to move this player
+			Player suggestedPlayer = gameState.findMatchingPlayer(suggestedSuspect)
+			if(!suggestedPlayer.location.equals(suggestedLocation)) {
+				// TODO: Update the gameState and broadcast to all the change of player location
+			}
+			
+			int currentPlayerIndex = playerIndex + 1
+			// loop through all player's starting with the player after the guessing player,
+			// skipping the guessing player
+			for(int i = 0; i < 5; ++i) {
+				if(currentPlayerIndex > 5) {
+					currentPlayerIndex = 0
+				}
+				Player currentPlayer = gamePlayers[currentPlayerIndex]
+				// TODO: Loop through all of the player's cards and see 
+				// 		 if they have any that are matching the suggestion
+				if( currentPlayer.hasMatchingCards()) {
+					// TODO: Inform the player they need to show a card
+					break
+				}
+				currentPlayerIndex++
+			}
+			// TODO: Do we need to set the next player's turn or is that a separate message and function?
+		}
 	}
-	
+
 	/**
 	 * Handles updating the gameState by moving the suspect token to the room.
 	 * 
@@ -137,17 +168,19 @@ class GameEngineService {
 	 * @return broadcast to all player's updating their boards
 	 */
 	def moveSuspectToken(Suspect, Location) {
-		
+
 	}
-	
+
 	/**
 	 * Informs the next player it is their turn
+	 * @param player - Current player
+	 * @return The id of the next player
 	 */
-	def nextTurn(Player) {
+	def nextTurn(Player player) {
 		// TODO: check if the player is in a room and can move
 		// TODO: Inform the player of their options
 	}
-	
+
 	/**
 	 * Handles starting a game.
 	 * @return success on game start
@@ -164,7 +197,7 @@ class GameEngineService {
 					// TODO: Inform that player it is their turn, scarlet always goes first
 				}
 			}
-			// TODO: Send out an error message?  We should not have gotten here? Scarlet should be in the game	
+			// TODO: Send out an error message?  We should not have gotten here? Scarlet should be in the game
 		}
 	}
 }

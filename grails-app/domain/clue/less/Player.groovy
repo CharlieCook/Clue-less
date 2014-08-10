@@ -22,8 +22,8 @@ class Player {
 	
 //	Card[] cards
 	
-	public Player(){
+	public Player(int suspectIndex){
 		location = Location.HALL
-		suspect = Suspect.SCARLET
+		suspect = Suspect.values()[suspectIndex]
 	}
 }

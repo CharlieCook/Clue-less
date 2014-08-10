@@ -64,4 +64,22 @@ class GameStateSpec extends Specification {
 		then:
 			thrown(GameFullException)
 	}
+	
+	void "test finding a player's number"() {
+		given:
+			GameState game = new GameState()
+			game.generatePlayers()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			game.claimSeat()
+			
+		when:
+			Player player = game.claimSeat()
+			
+		then:
+			assertTrue("Player id should not be -1", game.getPlayerNumber(player) != -1)
+			assertTrue("Player id should be 6", game.getPlayerNumber(player) == 6)
+	}
 }
