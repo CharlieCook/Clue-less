@@ -134,6 +134,7 @@ class GameState {
 		currentPlayer = 1
 		waitingOn = WaitingOn.PLAYER1
 		toDo = CurrentAction.TURNMOVE
+		gameStarted = true
 	}
 	
 	int getPlayerCount(){

@@ -46,7 +46,7 @@ class GameEngineService {
 					// TODO: Inform client that move is not ok
 				} else {
 					// update the player's location
-					player.location = location
+					currentPlayer.location = location
 					// TODO: Does this save off the game state correctly?
 					gameState.toDo = CurrentAction.TURNSUGGEST
 					gameState.save()
@@ -66,7 +66,7 @@ class GameEngineService {
 	 */
 	def isHallwayOccupied(GameState gameState, Location location) {
 		// Make sure the location is a hallway
-		if(!location.isHallway()) {
+		if(!Location.isHallway(location)) {
 			log.info("Location: " + location.value() + " is not a hallway")
 			return false
 		}
