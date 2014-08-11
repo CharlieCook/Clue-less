@@ -48,6 +48,12 @@ class GameState {
 	 */
 	boolean gameStarted
 	
+	int currentPlayer
+	
+	WaitingOn waitingOn = WaitingOn.NONE
+	
+	CurrentAction toDo = CurrentAction.PRESTART
+	
 	/**
 	 * Card representing the winning weapon.
 	 */
@@ -74,7 +80,7 @@ class GameState {
 	public GameState createGame(String name){
 		generateRandomSolution()
 		this.name = name?:""+new Date()
-		gameStarted = false
+		gameStarted = false		
 		return this
 	}
 	
@@ -115,10 +121,19 @@ class GameState {
 		for(Player p: getPlayers()){
 			if(!p.claimed){
 				p.claimed = true
+				if(getPlayerCount() == 6){
+					startGame()
+				}
 				return p
 			}
 		}
 		throw new GameFullException("No Seats available")
+	}
+	
+	public void startGame(){
+		currentPlayer = 1
+		waitingOn = WaitingOn.PLAYER1
+		toDo = CurrentAction.TURNMOVE
 	}
 	
 	int getPlayerCount(){
@@ -156,24 +171,5 @@ class GameState {
 			return 6
 		}
 		return -1 
-	}
-	
-	/**
-	 * Simply finds the player matching the suspect to move them.
-	 * @param suspect - Suspect we are matching to a player
-	 * @return Player matching the suspect
-	 */
-	public Player findMatchingPlayer(Suspect suspect) {
-		if(player1.suspect.equals(suspect)) 
-			return player1
-		if(player2.suspect.equals(suspect))
-			return player2
-		if(player3.suspect.equals(suspect))
-			return player3
-		if(player4.suspect.equals(suspect))
-			return player4
-		if(player5.suspect.equals(suspect))
-			return player5
-		return player6
 	}
 }

@@ -24,18 +24,6 @@ class GameEngineService {
 	}
 
 	/**
-	 * Update the game state with the new game state
-	 * @param UUID - ID of the game
-	 * @param GameState - new game state of the game
-	 * @return Broadcast state to all users in game
-	 */
-	def updateGameState(UUID, GameState newState) {
-		// TODO: Need input validation?
-		GameState.addByGameState(newState)
-		// TODO: Broadcast the updated state to all players
-	}
-
-	/**
 	 * Moves the corresponding player
 	 * 
 	 * @param Player - player that is attempting to move
@@ -81,10 +69,8 @@ class GameEngineService {
 			return false
 		}
 		// loop through all the players and see if any are in the hallway
-		for(Player player : gameState.getPlayers()) {
-			if(player.location.equals(location)) {
-				return true
-			}
+		if(Player.countByGameStateAndLocation(gameState, location) >= 1) {
+			return true
 		}
 		// hallway is not occupied
 		return false
@@ -133,9 +119,8 @@ class GameEngineService {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
 			// TODO: Error, this player should have a reference to the correct game state!
 		} else {
-			Player[] gamePlayers = gameState.getPlayers()
 			// required to check if we need to move this player
-			Player suggestedPlayer = gameState.findMatchingPlayer(suggestedSuspect)
+			Player suggestedPlayer = Player.findByGameStateAndSuspect(gameState, suggestedSuspect)
 			if(!suggestedPlayer.location.equals(suggestedLocation)) {
 				moveSuspectToken(suggestedPlayer, suggestedLocation)
 				// TODO: Update the gameState and broadcast to all the change of player location
@@ -187,25 +172,5 @@ class GameEngineService {
 		Player nextPlayer = player.gameState.getPlayers()[nextPlayerIndex]
 		// TODO: Inform the player of their options
 		//	Does this include giving the client their options?
-	}
-
-	/**
-	 * Handles starting a game.
-	 * @return success on game start
-	 */
-	def startGame(GameState gameState) {
-		if(gameState.getPlayers().size < 2) {
-			// TODO: Game cannot be started too few people
-		} else {
-			// TODO: Do we dish out the cards now?
-			gameState.gameStarted = true
-			GameState.addByGameState(gameState)
-			for( Player player : gameState.getPlayers()) {
-				if(player.suspect == Suspect.SCARLET) {
-					// TODO: Inform that player it is their turn, scarlet always goes first
-				}
-			}
-			// TODO: Send out an error message?  We should not have gotten here? Scarlet should be in the game
-		}
 	}
 }
