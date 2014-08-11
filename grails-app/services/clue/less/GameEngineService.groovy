@@ -137,6 +137,7 @@ class GameEngineService {
 			// required to check if we need to move this player
 			Player suggestedPlayer = gameState.findMatchingPlayer(suggestedSuspect)
 			if(!suggestedPlayer.location.equals(suggestedLocation)) {
+				moveSuspectToken(suggestedPlayer, suggestedLocation)
 				// TODO: Update the gameState and broadcast to all the change of player location
 			}
 			
@@ -165,10 +166,11 @@ class GameEngineService {
 	 * 
 	 * @param Suspect - Suspect in the suggestion
 	 * @param Location - Location the suggestion was made
-	 * @return broadcast to all player's updating their boards
+	 * @return broadcast to all player's updating their boards?
 	 */
-	def moveSuspectToken(Suspect, Location) {
-
+	def moveSuspectToken(Player suspect, Location location) {
+		// TODO: Is this really all that is needed?
+		suspect.location = location
 	}
 
 	/**
@@ -177,8 +179,14 @@ class GameEngineService {
 	 * @return The id of the next player
 	 */
 	def nextTurn(Player player) {
-		// TODO: check if the player is in a room and can move
+		int nextPlayerIndex = player.gameState.getPlayerIndex(player)++
+		if(nextPlayerIndex > 5) {
+			nextPlayerIndex = 0
+		}
+		// Get the next player
+		Player nextPlayer = player.gameState.getPlayers()[nextPlayerIndex]
 		// TODO: Inform the player of their options
+		//	Does this include giving the client their options?
 	}
 
 	/**
