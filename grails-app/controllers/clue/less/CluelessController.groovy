@@ -44,28 +44,43 @@ class CluelessController {
 		}
 	}
 	
-	def startGame(id) {
-		
-	}
-	
 	def gameState(long playerId){
-		return [game: getGameStateFromPlayer(playerId)]
+		return [game: getGameStateFromPlayer(playerId),
+			playerId: playerId]
 	}
 	
-	def move(long playerId, Location location){
-		log.info("Trying to move player: " + playerId)
-		Player player = Player.findById(playerID)
-		gameEngineService.movePlayer(player, location)
+	def move(long playerId, String location){
+		log.error("Trying to move player: " + playerId + " to: " + location)
+		Player player = Player.findById(playerId)
+		gameEngineService.movePlayer(player, Location.valueOf(location))
+		redirect(action: "gameState", params:[playerId: playerId])
 	}
 	
-	def suggest(UUID, player, suspect, location, weapon){}
+	def suggest(long playerId, String suspect, String location, String weapon){
+		log.error("Player: $playerId suggestion $suspect with $weapon in the $location")
+		Player player = Player.findById(playerId)
+		gameEngineService.makeSuggestion(Suspect.valueOf(suspect), 
+			Weapon.valueOf(weapon), Location.valueOf(location))
+		redirect(action: "gameState", params:[playerId: playerId])
+	}
 	
-	def disprove(UUID, player, card) {}
+	def disprove(long playerId, String card) {
+		log.error("Player: $playerId disproves with $card")
+		Player player = Player.findById(playerId)
+		//TODO Card stuff
+		redirect(action: "gameState", params:[playerId: playerId])
+	}
 	
-	def accuse(UUID, player, suspect, location, weapon){}
+	def accuse(long playerId, String suspect, String location, String weapon){
+		log.error("Player: $playerId accuses $suspect with $weapon in the $location")
+		Player player = Player.findById(playerId)
+		gameEngineService.makeAccusation(Suspect.valueOf(suspect),
+			Weapon.valueOf(weapon), Location.valueOf(location))
+		redirect(action: "gameState", params:[playerId: playerId])
+	}
 	
 	protected GameState getGameStateFromPlayer(long playerID){
-		log.info("finding game for player: " + playerID)
+		log.error("finding game for player: " + playerID)
 		Player player = Player.findById(playerID)
 		return player.gameState
 	}

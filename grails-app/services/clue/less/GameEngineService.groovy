@@ -4,6 +4,7 @@ import org.apache.commons.logging.LogFactory;
 
 import grails.transaction.Transactional
 
+
 /**
  * Handles actual manipulation of the GameState.  All of the internal logic is handled here.
  *
@@ -47,6 +48,7 @@ class GameEngineService {
 					// update the player's location
 					player.location = location
 					// TODO: Does this save off the game state correctly?
+					gameState.toDo = CurrentAction.TURNSUGGEST
 					gameState.save()
 					// TODO: Update all clients with the new game state
 					// TODO: Inform the next player it is their turn, is this the controller's job?
@@ -138,6 +140,9 @@ class GameEngineService {
 				// 		 if they have any that are matching the suggestion
 				if( currentPlayer.hasMatchingCards()) {
 					// TODO: Inform the player they need to show a card
+					gameState.waitingOn = WaitingOn.("PLAYER" + (i+1))
+					gameState.toDo = CurrentAction.DISPROVE
+					//TODO add fields for current suggestion
 					break
 				}
 				currentPlayerIndex++
