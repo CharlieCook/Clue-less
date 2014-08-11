@@ -91,22 +91,22 @@ class GameState {
 	 * Generates the players and assigns them a number 1 through 6 for which suspect they are
 	 */
 	private void generatePlayers(){
-		player1 = new Player(1)
+		player1 = new Player(0)
 		player1.gameState = this
 		player1.save()
-		player2 = new Player(2)
+		player2 = new Player(1)
 		player2.gameState = this
 		player2.save()
-		player3 = new Player(3)
+		player3 = new Player(2)
 		player3.gameState = this
 		player3.save()
-		player4 = new Player(4)
+		player4 = new Player(3)
 		player4.gameState = this
 		player4.save()
-		player5 = new Player(5)
+		player5 = new Player(4)
 		player5.gameState = this
 		player5.save()
-		player6 = new Player(6)
+		player6 = new Player(5)
 		player6.gameState = this
 		player6.save()
 	}
