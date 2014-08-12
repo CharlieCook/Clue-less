@@ -67,7 +67,7 @@ class GameEngineService {
 	def isHallwayOccupied(GameState gameState, Location location) {
 		// Make sure the location is a hallway
 		if(!Location.isHallway(location)) {
-			log.info("Location: " + location.value() + " is not a hallway")
+			log.info("Location: " + location.name() + " is not a hallway")
 			return false
 		}
 		// loop through all the players and see if any are in the hallway
@@ -91,8 +91,8 @@ class GameEngineService {
 			Weapon guessedWeapon, Location guessedLocation) {
 		GameState gameState = player.gameState
 		if(gameState.solutionSuspect.equals(guessedSuspect) &&
-		gameState.solutionWeapon.equals(guessedWeapon) &&
-		gameState.solutionLocation.equals(guessedLocation)) {
+			gameState.solutionWeapon.equals(guessedWeapon) &&
+			gameState.solutionLocation.equals(guessedLocation)) {
 			// TODO: Inform all players of the winner
 		} else {
 			player.accusationIncorrect = true;
@@ -116,7 +116,7 @@ class GameEngineService {
 		
 		GameState gameState = guessingPlayer.gameState
 		// run through the players in order and if they have a card that matches the guess inform them.
-		int playerIndex = gameState.getPlayerNumber(guessingPLayer)
+		int playerIndex = gameState.getPlayerNumber(guessingPlayer)
 		if(playerIndex == -1) {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
 			// TODO: Error, this player should have a reference to the correct game state!
@@ -135,7 +135,7 @@ class GameEngineService {
 				if(currentPlayerIndex > 5) {
 					currentPlayerIndex = 0
 				}
-				Player currentPlayer = gamePlayers[currentPlayerIndex]
+				Player currentPlayer = gameState.getPlayers()[currentPlayerIndex]
 				// TODO: Loop through all of the player's cards and see 
 				// 		 if they have any that are matching the suggestion
 				if( currentPlayer.hasMatchingCards()) {

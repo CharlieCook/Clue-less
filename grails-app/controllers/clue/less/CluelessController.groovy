@@ -59,7 +59,7 @@ class CluelessController {
 	def suggest(long playerId, String suspect, String location, String weapon){
 		log.error("Player: $playerId suggestion $suspect with $weapon in the $location")
 		Player player = Player.findById(playerId)
-		gameEngineService.makeSuggestion(Suspect.valueOf(suspect), 
+		gameEngineService.makeSuggestion(player, Suspect.valueOf(suspect), 
 			Weapon.valueOf(weapon), Location.valueOf(location))
 		redirect(action: "gameState", params:[playerId: playerId])
 	}
@@ -74,7 +74,7 @@ class CluelessController {
 	def accuse(long playerId, String suspect, String location, String weapon){
 		log.error("Player: $playerId accuses $suspect with $weapon in the $location")
 		Player player = Player.findById(playerId)
-		gameEngineService.makeAccusation(Suspect.valueOf(suspect),
+		gameEngineService.makeAccusation(player, Suspect.valueOf(suspect),
 			Weapon.valueOf(weapon), Location.valueOf(location))
 		redirect(action: "gameState", params:[playerId: playerId])
 	}
