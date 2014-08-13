@@ -1,3 +1,9 @@
+<g:if  test="${game.players[game.waitingOn.ordinal()-1].id != playerId}"><script type="text/javascript">
+<%--Reloads the page every 3000ms, except for the Waiting on player since that could get annoying if the page reloads as you are trying to type--%>
+window.setTimeout("window.location.reload()",3000)
+</script>
+</g:if>
+
 ${game.name}
 Status:<br/>
 Player1: ${game.player1.claimed}, ${game.player1.cards[0]}<br/>
