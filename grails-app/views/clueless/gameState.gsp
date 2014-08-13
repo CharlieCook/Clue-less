@@ -11,8 +11,14 @@ window.setTimeout("window.location.reload()",3000)
 <body>
 <r:layoutResources />
 
-<div id="gameBoard">
+	<div id="gameBoard">
 		<g:render template="gameBoard" />
+	</div>
+	
+	<div id="rightPanelContainer">
+		<div id="gameStatus">
+			<g:render template="gameStatus" />
+		</div>
 	</div>
 ${game.name}
 Status:<br/>
