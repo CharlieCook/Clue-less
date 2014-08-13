@@ -18,6 +18,9 @@ class GameState {
 		player4 nullable: true
 		player5 nullable: true
 		player6 nullable: true
+		suggestionSuspect nullable: true
+		suggestionWeapon nullable: true
+		suggestionLocation nullable: true
 	}
 	
 	static transients = ['playerCount']
@@ -63,11 +66,18 @@ class GameState {
 	 * Card representing the winning location.
 	 */
 	Location solutionLocation
-	
+		
 	/**
 	 * Card representing the winning suspect.
 	 */
 	Suspect solutionSuspect
+	
+	
+	Suspect suggestionSuspect
+	
+	Weapon suggestionWeapon
+	
+	Location suggestionLocation
 	
 	/**
 	 * Default constructor required by hibernate
