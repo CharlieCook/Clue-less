@@ -1,17 +1,27 @@
+<head>
 <g:if  test="${game.players[game.waitingOn.ordinal()-1].id != playerId}"><script type="text/javascript">
 <%--Reloads the page every 3000ms, except for the Waiting on player since that could get annoying if the page reloads as you are trying to type--%>
 window.setTimeout("window.location.reload()",3000)
 </script>
 </g:if>
 
+<r:require modules="application" />
+<r:layoutResources />
+</head>
+<body>
+<r:layoutResources />
+
+<div id="gameBoard">
+		<g:render template="gameBoard" />
+	</div>
 ${game.name}
 Status:<br/>
 Player1: ${game.player1.claimed}, ${game.player1.cards[0]}<br/>
-Player2: ${game.player2.claimed}, ${game.player2.cards}<br/>
-Player3: ${game.player3.claimed}<br/>
-Player4: ${game.player4.claimed}<br/>
-Player5: ${game.player5.claimed}<br/>
-Player6: ${game.player6.claimed}<br/>
+Player2: ${game.player2.claimed}, ${game.player2.cards[0]}<br/>
+Player3: ${game.player3.claimed}, ${game.player3.cards[0]}<br/>
+Player4: ${game.player4.claimed}, ${game.player4.cards[0]}<br/>
+Player5: ${game.player5.claimed}, ${game.player5.cards[0]}<br/>
+Player6: ${game.player6.claimed}, ${game.player6.cards[0]}<br/>
 <br/>
 Current Player: ${game.currentPlayer}<br/>
 Waiting on player: ${game.waitingOn}, to do ${game.toDo}<br/>
@@ -63,3 +73,4 @@ Card: <input type="text" name="card"> <br/>
 	<g:submitButton name="Disprove" />
 </g:form>
 </g:if>
+</body>

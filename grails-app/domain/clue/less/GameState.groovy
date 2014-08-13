@@ -199,4 +199,15 @@ class GameState {
 		}
 		return false
 	}
+	
+	public List playersInRoom(String strLoc){
+		Location loc = Location.valueOf(strLoc)
+		List result = []
+		for(Player p: getPlayers()){
+			if(p.location == loc){
+				result.add(p)
+			}
+		}
+		return result
+	}
 }

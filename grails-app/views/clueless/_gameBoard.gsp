@@ -1,37 +1,37 @@
 
 <table id="gameTable">
 	<tr>
-		<td><span class="studyRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="hallRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="loungeRoom">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'STUDY', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY1', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALL', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY2', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'LOUNGE', game: game, playerId: playerId]"></g:render></td>
 	</tr>
 	<tr>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY3', game: game, playerId: playerId]"></g:render></td>
 		<td></td>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY4', game: game, playerId: playerId]"></g:render></td>
 		<td></td>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY5', game: game, playerId: playerId]"></g:render></td>
 	</tr>
 	<tr>
-		<td><span class="libraryRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="billiardsRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="diningRoom">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'LIBRARY', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY6', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'BILLARD', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY7', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'DINING', game: game, playerId: playerId]"></g:render></td>
 	<tr>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY8', game: game, playerId: playerId]"></g:render></td>
 		<td></td>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY9', game: game, playerId: playerId]"></g:render></td>
 		<td></td>
-		<td><span class="hall">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY10', game: game, playerId: playerId]"></g:render></td>
 	</tr>
 	<tr>
-		<td><span class="conservatoryRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="ballRoom">&nbsp</span></td>
-		<td><span class="hall">&nbsp</span></td>
-		<td><span class="kitchenRoom">&nbsp</span></td>
+		<td><g:render template="boardCell" model="[room: 'CONSERVATORY', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY11', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'BALLROOM', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'HALLWAY12', game: game, playerId: playerId]"></g:render></td>
+		<td><g:render template="boardCell" model="[room: 'KITCHEN', game: game, playerId: playerId]"></g:render></td>
 	</tr>
 </table>

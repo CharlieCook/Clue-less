@@ -28,7 +28,7 @@
     width: 217px;
 }
 
-.billiardsRoom{
+.billardRoom{
 	background-image: url("../images/sprites.png");
     background-position: -300px -354px;
     height: 250px;
@@ -36,7 +36,7 @@
 }
 
 
-.ballRoom{
+.ballroomRoom{
 	background-image: url("../images/sprites.png");
     background-position: -300px -685px;
     height: 250px;
@@ -64,7 +64,7 @@
     width: 279px;
 }
 
-.hall{
+span[class*='HALLWAY']{
 	background-image: url("../images/sprites.png");
  	background-position: 0 -1078px;
     height: 123px;
