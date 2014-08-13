@@ -1,7 +1,7 @@
 ${game.name}
 Status:<br/>
-Player1: ${game.player1.claimed}<br/>
-Player2: ${game.player2.claimed}<br/>
+Player1: ${game.player1.claimed}, ${game.player1.cards[0]}<br/>
+Player2: ${game.player2.claimed}, ${game.player2.cards}<br/>
 Player3: ${game.player3.claimed}<br/>
 Player4: ${game.player4.claimed}<br/>
 Player5: ${game.player5.claimed}<br/>
