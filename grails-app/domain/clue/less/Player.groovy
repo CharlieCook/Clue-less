@@ -47,4 +47,18 @@ class Player {
 	public Card[] getCards(){
 		return [card1, card2, card3]
 	}
+	
+	/**
+	 * Checks if the suggested card is in this player's hand.
+	 * @param suggestedCard - Card to be checked against all of this player's cards
+	 * @return Indication if this player has a card that matches the suggestion card
+	 */
+	public boolean hasCard(Card suggestedCard) {
+		if(suggestedCard.equals(card1) ||
+			suggestedCard.equals(card2) ||
+			suggestedCard.equals(card3)) {
+			return true
+		}
+		return false
+	}
 }

@@ -115,8 +115,12 @@ class GameEngineService {
 		Weapon suggestedWeapon, Location suggestedLocation) {
 		
 		GameState gameState = guessingPlayer.gameState
+		// store the current suggested suspect, weapon, and location in the game state
+		gameState.suggestionWeapon = suggestedWeapon
+		gameState.suggestionLocation = suggestedLocation
+		gameState.suggestionSuspect = suggestedSuspect
 		// run through the players in order and if they have a card that matches the guess inform them.
-		int playerIndex = gameState.getPlayerNumber(guessingPlayer)
+		int playerIndex = gameState.getPlayerNumber(guessingPlayer)-1
 		if(playerIndex == -1) {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
 			// TODO: Error, this player should have a reference to the correct game state!
@@ -138,7 +142,7 @@ class GameEngineService {
 				Player currentPlayer = gameState.getPlayers()[currentPlayerIndex]
 				// TODO: Loop through all of the player's cards and see 
 				// 		 if they have any that are matching the suggestion
-				if( currentPlayer.hasMatchingCards()) {
+				if( gameState.hasMatchingCard(currentPlayer)) {
 					// TODO: Inform the player they need to show a card
 					gameState.waitingOn = WaitingOn.("PLAYER" + (i+1))
 					gameState.toDo = CurrentAction.DISPROVE

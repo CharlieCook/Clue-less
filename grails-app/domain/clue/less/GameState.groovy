@@ -71,8 +71,10 @@ class GameState {
 	 * Card representing the winning suspect.
 	 */
 	Suspect solutionSuspect
-	
-	
+
+	/**
+	 * Holds the current values of the suggestion	
+	 */
 	Suspect suggestionSuspect
 	
 	Weapon suggestionWeapon
@@ -182,5 +184,19 @@ class GameState {
 			return 6
 		}
 		return -1 
+	}
+	
+	/**
+	 * During a suggestion checks if a player has a matching card.
+	 * @param player - Player being checked against the current suggestion cards
+	 * @return Indication if the player has a card for the suggestion
+	 */
+	public boolean hasMatchingCard(Player player){
+		if(player.hasCard(Card.valueOf(suggestionWeapon.name())) ||
+			player.hasCard(Card.valueOf(suggestionLocation.name())) ||
+			player.hasCard(Card.valueOf(suggestionSuspect.name()))) {
+			return true
+		}
+		return false
 	}
 }
