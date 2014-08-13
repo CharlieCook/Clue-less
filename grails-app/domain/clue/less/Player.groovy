@@ -26,8 +26,8 @@ class Player {
 	Card card2
 	Card card3
 	
-	public Player(int suspectIndex){
-		location = Location.HALL
+	public Player(int suspectIndex, Location location){
+		this.location = location
 		suspect = Suspect.values()[suspectIndex]
 		card1 = Card.BALLROOM
 		card2 = Card.DINING
