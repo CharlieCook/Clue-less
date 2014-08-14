@@ -281,7 +281,7 @@ class GameState {
 	 */
 	public void nextPlayer() {
 		int nextPlayerIndex = currentPlayer + 1
-		if(nextPlayerIndex > 6) {
+		if(nextPlayerIndex > 5) {
 			nextPlayerIndex = 0
 		}
 		waitingOn = WaitingOn.values()[nextPlayerIndex + 1]
