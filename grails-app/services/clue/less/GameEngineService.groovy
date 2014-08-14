@@ -146,7 +146,7 @@ class GameEngineService {
 			// skipping the guessing player
 //			boolean playerHasCard = false
 			for(int i = 0; i < 5; ++i) {
-				if(currentPlayerId > 6) {
+				if(currentPlayerId >= 6) {
 					currentPlayerId = 0
 				}
 				Player currentPlayer = gameState.getPlayers()[currentPlayerId]
