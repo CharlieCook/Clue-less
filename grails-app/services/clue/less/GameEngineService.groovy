@@ -129,6 +129,9 @@ class GameEngineService {
 		if(playerIndex < 0 || playerIndex > 5) {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
 			// TODO: Error, this player should have a reference to the correct game state!
+		} else if(Location.isHallway(suggestedLocation)) {
+			log.error("Player: " + guessingPlayer.id + " is trying to make a suggestion in a hallway.")
+			throw new InvalidMoveException("Can not make suggetion in a hallway")
 		} else {
 			// required to check if we need to move this player
 			Player suggestedPlayer = Player.findByGameStateAndSuspect(gameState, suggestedSuspect)
