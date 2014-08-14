@@ -19,6 +19,9 @@ window.setTimeout("window.location.reload()",3000)
 		<div id="gameStatus">
 			<g:render template="gameStatus" />
 		</div>
+		<div id=suggestionbox>
+			<g:render template="suggestionBox" />
+		</div>
 	</div>
 ${game.name}
 Status:<br/>
