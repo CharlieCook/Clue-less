@@ -51,9 +51,14 @@ class CluelessController {
 	
 	def move(long playerId, String location){
 		log.error("Trying to move player: " + playerId + " to: " + location)
-		Player player = Player.findById(playerId)
-		gameEngineService.movePlayer(player, Location.valueOf(location))
-		redirect(action: "gameState", params:[playerId: playerId])
+		try {
+			Player player = Player.findById(playerId)
+			gameEngineService.movePlayer(player, Location.valueOf(location))
+			redirect(action: "gameState", params:[playerId: playerId])
+		} catch(InvalidMoveException e) {
+			response.status = 410
+			return
+		}
 	}
 	
 	def suggest(long playerId, String suspect, String location, String weapon){

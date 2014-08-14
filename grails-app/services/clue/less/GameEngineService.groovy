@@ -43,10 +43,10 @@ class GameEngineService {
 				// TODO: This logic still needs work
 				if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
 					log.info("Player cannot move from room")
-					// TODO: Inform client that move is not ok
-					// reiterate that the player needs to move
+					// save off the state and throw an error
 					gameState.toDo = CurrentAction.TURNMOVE
 					gameState.save()
+					return new InvalidMoveException("There are no valid moves from this room")
 				} else {
 					// update the player's location
 					currentPlayer.location = location
