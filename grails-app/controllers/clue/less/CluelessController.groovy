@@ -73,7 +73,7 @@ class CluelessController {
 		log.error("Player: $playerId disproves with $card")
 		Player player = Player.findById(playerId)
 		// update the card
-		player.gameState.disproven()
+		player.gameState.disproven(player, Card.valueOf(card))
 		player.gameState.save()
 		// TODO: is the card data getting transmitted back to the client?
 		redirect(action: "gameState", params:[playerId: playerId, card: card])

@@ -21,6 +21,8 @@ class GameState {
 		suggestionSuspect nullable: true
 		suggestionWeapon nullable: true
 		suggestionLocation nullable: true
+		disprovedBy nullable : true
+		disprovedWith nullable:true
 	}
 	
 	static transients = ['playerCount']
@@ -80,6 +82,9 @@ class GameState {
 	Weapon suggestionWeapon
 	
 	Location suggestionLocation
+	
+	Suspect disprovedBy
+	Card disprovedWith
 	
 	/**
 	 * Default constructor required by hibernate
@@ -293,7 +298,9 @@ class GameState {
 	 * Takes the card used to disprove and sends the updated data to the player
 	 * @param card
 	 */
-	public void disproven() {
+	public void disproven(Player player, Card card) {
+		disprovedBy = player.suspect
+		disprovedWith = card
 		waitingOn = WaitingOn.values()[currentPlayer+1]
 		toDo = CurrentAction.CHECKCARD
 	}
