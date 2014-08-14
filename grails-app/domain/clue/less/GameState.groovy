@@ -164,8 +164,15 @@ class GameState {
 	}
 	
 	public void startGame(){
-		currentPlayer = 1
-		waitingOn = WaitingOn.PLAYER1
+		// scarlet starts first
+		for(int i = 0; i < 6; ++i) {
+			Player p = getPlayers()[i]
+			if(p.suspect.equals(Suspect.SCARLET)) {
+				// +1 offset due to NONE value
+				waitingOn = WaitingOn.values()[i+1]
+				currentPlayer = i
+			}
+		}
 		toDo = CurrentAction.TURNMOVE
 		gameStarted = true
 	}
@@ -267,5 +274,27 @@ class GameState {
 			}
 		}
 		return result
+	}
+	
+	/**
+	 * Simple utility to move the gameState to the next player
+	 */
+	public void nextPlayer() {
+		int nextPlayerIndex = currentPlayer + 1
+		if(nextPlayerIndex > 6) {
+			nextPlayerIndex = 0
+		}
+		waitingOn = WaitingOn.values()[nextPlayerIndex + 1]
+		toDo = CurrentAction.TURNMOVE
+		currentPlayer = nextPlayerIndex
+	}
+	
+	/**
+	 * Takes the card used to disprove and sends the updated data to the player
+	 * @param card
+	 */
+	public void disproven() {
+		waitingOn = WaitingOn.values()[currentPlayer+1]
+		toDo = CurrentAction.CHECKCARD
 	}
 }

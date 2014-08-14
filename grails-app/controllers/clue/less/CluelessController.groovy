@@ -67,8 +67,11 @@ class CluelessController {
 	def disprove(long playerId, String card) {
 		log.error("Player: $playerId disproves with $card")
 		Player player = Player.findById(playerId)
-		//TODO Card stuff
-		redirect(action: "gameState", params:[playerId: playerId])
+		// update the card
+		player.gameState.disproven()
+		player.gameState.save()
+		// TODO: is the card data getting transmitted back to the client?
+		redirect(action: "gameState", params:[playerId: playerId, card: card])
 	}
 	
 	def accuse(long playerId, String suspect, String location, String weapon){
@@ -79,8 +82,17 @@ class CluelessController {
 		redirect(action: "gameState", params:[playerId: playerId])
 	}
 	
+	def nextPlayer(long playerId){
+		// switch to the next player in the list
+		log.info("Player: $playerId is done with the turn, switching to next player")
+		Player player = Player.findById(playerId)
+		player.gameState.nextPlayer()
+		player.gameState.save()
+		redirect(action: "gameState", params:[playerId: playerId])
+	}
+	
 	protected GameState getGameStateFromPlayer(long playerID){
-		log.error("finding game for player: " + playerID)
+		log.info("finding game for player: " + playerID)
 		Player player = Player.findById(playerID)
 		return player.gameState
 	}

@@ -44,11 +44,16 @@ class GameEngineService {
 				if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
 					log.info("Player cannot move from room")
 					// TODO: Inform client that move is not ok
+					// reiterate that the player needs to move
+					gameState.toDo = CurrentAction.TURNMOVE
+					gameState.save()
 				} else {
 					// update the player's location
 					currentPlayer.location = location
 					// TODO: Does this save off the game state correctly?
-					gameState.toDo = CurrentAction.TURNSUGGEST
+					if(!Location.isHallway(location)) {
+						gameState.toDo = CurrentAction.TURNSUGGEST
+					}
 					gameState.save()
 					// TODO: Update all clients with the new game state
 					// TODO: Inform the next player it is their turn, is this the controller's job?
@@ -120,8 +125,8 @@ class GameEngineService {
 		gameState.suggestionLocation = suggestedLocation
 		gameState.suggestionSuspect = suggestedSuspect
 		// run through the players in order and if they have a card that matches the guess inform them.
-		int playerIndex = gameState.getPlayerNumber(guessingPlayer)-1
-		if(playerIndex == -1) {
+		int playerIndex = gameState.currentPlayer
+		if(playerIndex < 0 || playerIndex > 5) {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
 			// TODO: Error, this player should have a reference to the correct game state!
 		} else {
@@ -132,26 +137,34 @@ class GameEngineService {
 				// TODO: Update the gameState and broadcast to all the change of player location
 			}
 			
-			int currentPlayerIndex = playerIndex + 1
+			// represents the actual player number being tracked, not the index
+			int currentPlayerId = playerIndex + 1
 			// loop through all player's starting with the player after the guessing player,
 			// skipping the guessing player
+//			boolean playerHasCard = false
 			for(int i = 0; i < 5; ++i) {
-				if(currentPlayerIndex > 5) {
-					currentPlayerIndex = 0
+				if(currentPlayerId > 6) {
+					currentPlayerId = 0
 				}
-				Player currentPlayer = gameState.getPlayers()[currentPlayerIndex]
+				Player currentPlayer = gameState.getPlayers()[currentPlayerId]
 				// TODO: Loop through all of the player's cards and see 
 				// 		 if they have any that are matching the suggestion
 				if( gameState.hasMatchingCard(currentPlayer)) {
 					// TODO: Inform the player they need to show a card
-					gameState.waitingOn = WaitingOn.("PLAYER" + (i+1))
+					gameState.waitingOn = WaitingOn.("PLAYER" + (currentPlayerId + 1))
 					gameState.toDo = CurrentAction.DISPROVE
 					//TODO add fields for current suggestion
+//					playerHasCard = true
 					break
 				}
-				currentPlayerIndex++
+				currentPlayerId++
 			}
-			// TODO: Do we need to set the next player's turn or is that a separate message and function?
+			// No player has a card to disprove the suggestion, next player's turn
+			// TODO: Do we allow the player a chance to make an accusation first?
+//			if(!playerHasCard) {
+//				gameState.nextPlayer()
+//				gameState.save()
+//			}
 		}
 	}
 
@@ -163,23 +176,6 @@ class GameEngineService {
 	 * @return broadcast to all player's updating their boards?
 	 */
 	def moveSuspectToken(Player suspect, Location location) {
-		// TODO: Is this really all that is needed?
 		suspect.location = location
-	}
-
-	/**
-	 * Informs the next player it is their turn
-	 * @param player - Current player
-	 * @return The id of the next player
-	 */
-	def nextTurn(Player player) {
-		int nextPlayerIndex = player.gameState.getPlayerIndex(player)++
-		if(nextPlayerIndex > 5) {
-			nextPlayerIndex = 0
-		}
-		// Get the next player
-		Player nextPlayer = player.gameState.getPlayers()[nextPlayerIndex]
-		// TODO: Inform the player of their options
-		//	Does this include giving the client their options?
 	}
 }
