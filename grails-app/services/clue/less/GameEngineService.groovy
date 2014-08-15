@@ -41,7 +41,14 @@ class GameEngineService {
 			// don't compare to self
 			if(gamePlayer.id != currentPlayer.id) {
 				// TODO: This logic still needs work
-				if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
+				if(!Location.isMoveValid(currentPlayer.location, location)) {
+					// The player is trying to make an invalid move
+					log.info("Player is trying to make an invlid move")
+					gameState.toDo = CurrentAction.TURNMOVE
+					gameState.save()
+					return new InvalidMoveException("That move is invalid")
+				} else if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
+					// the player cannot move their piece
 					log.info("Player cannot move from room")
 					// save off the state and throw an error
 					gameState.toDo = CurrentAction.TURNMOVE
