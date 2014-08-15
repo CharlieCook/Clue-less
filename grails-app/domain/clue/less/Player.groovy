@@ -22,6 +22,11 @@ class Player {
 	 */
 	boolean accusationIncorrect = false
 	
+	/**
+	 * Flag indicating if the player has moved during their turn, prevents double moves.
+	 */
+	boolean moved = false
+	
 	Card card1	
 	Card card2
 	Card card3

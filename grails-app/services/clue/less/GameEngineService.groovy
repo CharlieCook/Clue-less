@@ -33,7 +33,10 @@ class GameEngineService {
 	def movePlayer(Player currentPlayer, Location location) {
 		if(currentPlayer.location.equals(location)) {
 			log.info("Cannot move to the same location")
-			// TODO: inform player you cannot move to the same location
+			return new InvalidMoveException("You are already at this location")
+		} else if(currentPlayer.moved) {
+			log.info("Player cannot move more than once per turn")
+			return new InvalidMoveException("Cannot move more than once")
 		}
 
 		GameState gameState = currentPlayer.gameState
@@ -57,6 +60,7 @@ class GameEngineService {
 				} else {
 					// update the player's location
 					currentPlayer.location = location
+					currentPlayer.moved = true
 					// TODO: Does this save off the game state correctly?
 					if(!Location.isHallway(location)) {
 						gameState.toDo = CurrentAction.TURNSUGGEST

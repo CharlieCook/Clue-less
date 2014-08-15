@@ -300,6 +300,7 @@ class GameState {
 		waitingOn = WaitingOn.values()[nextPlayerIndex + 1]
 		toDo = CurrentAction.TURNMOVE
 		currentPlayer = nextPlayerIndex
+		getPlayers()[currentPlayer].moved = false
 	}
 	
 	/**
