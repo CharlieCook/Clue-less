@@ -2,6 +2,11 @@
 <span id="playerIcon" class="${game.players[game.waitingOn.ordinal()-1].suspect}Player"></span>
 <span id="currentPlayer">Waiting on: ${game.waitingOn}</span> <br>
 <span id="currentAction">to do: ${game.toDo}</span> <br/>
+<g:if test="${game.toDo.toString() == 'GAMEOVER'}">${game.players[game.waitingOn.ordinal()-1].suspect} solved the murder:<br/>
+	It was ${game.solutionSuspect}
+	in the ${game.solutionLocation}
+	with the ${game.solutionWeapon}
+</g:if>
 <g:if test="${game.suggestionSuspect}">
 <span><g:if test="${game.toDo.toString() == 'DISPROVE'}"> Current Suggestion:<br/>
 	It was ${game.suggestionSuspect}

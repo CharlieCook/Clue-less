@@ -20,6 +20,7 @@ class CluelessController {
 		game.createGame(name)
 		game.save()
 		game.generatePlayers()
+		log.error("Game created: it was ${game.solutionSuspect} with the ${game.solutionWeapon} in the ${game.solutionLocation}")
 		redirect(action: "joinGame", params:[gameId: game.id])
 		return [game: game]
 	}
