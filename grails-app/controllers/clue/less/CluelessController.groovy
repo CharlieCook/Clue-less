@@ -63,10 +63,15 @@ class CluelessController {
 	
 	def suggest(long playerId, String suspect, String location, String weapon){
 		log.error("Player: $playerId suggestion $suspect with $weapon in the $location")
-		Player player = Player.findById(playerId)
-		gameEngineService.makeSuggestion(player, Suspect.valueOf(suspect), 
-			Weapon.valueOf(weapon), Location.valueOf(location))
-		redirect(action: "gameState", params:[playerId: playerId])
+		try {
+			Player player = Player.findById(playerId)
+			gameEngineService.makeSuggestion(player, Suspect.valueOf(suspect), 
+				Weapon.valueOf(weapon), Location.valueOf(location))
+			redirect(action: "gameState", params:[playerId: playerId])
+		} catch(InvalidSuggestionException e) {
+			response.status = 410
+			return
+		}
 	}
 	
 	def disprove(long playerId, String card) {

@@ -37,37 +37,34 @@ class GameEngineService {
 		} else if(currentPlayer.moved) {
 			log.info("Player cannot move more than once per turn")
 			return new InvalidMoveException("Cannot move more than once")
+		} else if(!Location.isMoveValid(currentPlayer.location, location)) {
+			log.info("Player is trying to make an invalid move")
+			gameState.toDo = CurrentAction.TURNMOVE
+			gameState.save()
+			throw new InvalidMoveException("That move is invalid")
 		}
 
 		GameState gameState = currentPlayer.gameState
 		for(Player gamePlayer : gameState.getPlayers()) {
 			// don't compare to self
 			if(gamePlayer.id != currentPlayer.id) {
-				// TODO: This logic still needs work
-				if(!Location.isMoveValid(currentPlayer.location, location)) {
-					// The player is trying to make an invalid move
-					log.info("Player is trying to make an invlid move")
-					gameState.toDo = CurrentAction.TURNMOVE
-					gameState.save()
-					return new InvalidMoveException("That move is invalid")
-				} else if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
+				// Check if the player can move
+				 if(isHallwayOccupied(gameState, location) && !Location.isCornerRoom(location)) {
 					// the player cannot move their piece
 					log.info("Player cannot move from room")
 					// save off the state and throw an error
 					gameState.toDo = CurrentAction.TURNMOVE
 					gameState.save()
-					return new InvalidMoveException("There are no valid moves from this room")
+					throw new InvalidMoveException("There are no valid moves from this room")
 				} else {
 					// update the player's location
 					currentPlayer.location = location
 					currentPlayer.moved = true
-					// TODO: Does this save off the game state correctly?
 					if(!Location.isHallway(location)) {
 						gameState.toDo = CurrentAction.TURNSUGGEST
 					}
 					gameState.save()
-					// TODO: Update all clients with the new game state
-					// TODO: Inform the next player it is their turn, is this the controller's job?
+					break
 				}
 			}
 		}
@@ -114,7 +111,8 @@ class GameEngineService {
 			gameState.save()
 		} else {
 			// player can no longer take a turn
-			player.accusationIncorrect = true;
+			player.accusationIncorrect = true
+			gameState.nextPlayer()
 			gameState.save()
 		}
 	}
@@ -140,46 +138,36 @@ class GameEngineService {
 		int playerIndex = gameState.currentPlayer
 		if(playerIndex < 0 || playerIndex > 5) {
 			log.error("Player: " + guessingPlayer.id + " is referencing a game state it is not a part of.")
-			// TODO: Error, this player should have a reference to the correct game state!
+			throw new InvalidSuggestionException("Invalid playerId: " + guessingPlayer.id)
 		} else if(Location.isHallway(suggestedLocation)) {
 			log.error("Player: " + guessingPlayer.id + " is trying to make a suggestion in a hallway.")
-			throw new InvalidMoveException("Can not make suggetion in a hallway")
+			throw new InvalidSuggestionException("Can not make suggetion in a hallway")
 		} else {
 			// required to check if we need to move this player
 			Player suggestedPlayer = Player.findByGameStateAndSuspect(gameState, suggestedSuspect)
 			if(!suggestedPlayer.location.equals(suggestedLocation)) {
 				moveSuspectToken(suggestedPlayer, suggestedLocation)
-				// TODO: Update the gameState and broadcast to all the change of player location
 			}
 			
 			// represents the actual player number being tracked, not the index
 			int currentPlayerId = playerIndex + 1
 			// loop through all player's starting with the player after the guessing player,
 			// skipping the guessing player
-//			boolean playerHasCard = false
 			for(int i = 0; i < 5; ++i) {
 				if(currentPlayerId >= 6) {
 					currentPlayerId = 0
 				}
 				Player currentPlayer = gameState.getPlayers()[currentPlayerId]
-				// TODO: Loop through all of the player's cards and see 
+				// Loop through all of the player's cards and see 
 				// 		 if they have any that are matching the suggestion
 				if( gameState.hasMatchingCard(currentPlayer)) {
-					// TODO: Inform the player they need to show a card
+					// Inform the player they need to show a card
 					gameState.waitingOn = WaitingOn.("PLAYER" + (currentPlayerId + 1))
 					gameState.toDo = CurrentAction.DISPROVE
-					//TODO add fields for current suggestion
-//					playerHasCard = true
 					break
 				}
 				currentPlayerId++
 			}
-			// No player has a card to disprove the suggestion, next player's turn
-			// TODO: Do we allow the player a chance to make an accusation first?
-//			if(!playerHasCard) {
-//				gameState.nextPlayer()
-//				gameState.save()
-//			}
 		}
 	}
 
