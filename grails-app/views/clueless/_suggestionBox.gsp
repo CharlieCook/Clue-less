@@ -32,6 +32,6 @@
 		${game.players[game.waitingOn.ordinal()-1].location}
 	</g:if>
 <br>
-	<br> <g:actionSubmit value="Make Accusation" action="accuse" disabled="${!(game.players[game.waitingOn.ordinal()-1].id == playerId)?'true':'false'}"/>
-	<g:actionSubmit value="Make Suggestion" action="suggest" disabled="${!(game.players[game.waitingOn.ordinal()-1].id == playerId && (game.toDo.toString() == 'TURNMOVE' || game.toDo.toString() == 'TURNSUGGEST'))?'true':'false'}"/>
+	<br> <g:actionSubmit value="Make Accusation" action="accuse" disabled="${!(game.players[game.waitingOn.ordinal()-1].id == playerId && !game.players[game.waitingOn.ordinal()-1].location.toString().startsWith('HALLWAY'))?'true':'false'}"/>
+	<g:actionSubmit value="Make Suggestion" action="suggest" disabled="${!(game.players[game.waitingOn.ordinal()-1].id == playerId && (game.toDo.toString() == 'TURNMOVE' || game.toDo.toString() == 'TURNSUGGEST') && !game.players[game.waitingOn.ordinal()-1].location.toString().startsWith('HALLWAY') )?'true':'false'}"/>
 </g:form>
