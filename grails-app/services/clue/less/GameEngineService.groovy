@@ -98,12 +98,13 @@ class GameEngineService {
 		if(gameState.solutionSuspect.equals(guessedSuspect) &&
 			gameState.solutionWeapon.equals(guessedWeapon) &&
 			gameState.solutionLocation.equals(guessedLocation)) {
-			// TODO: Inform all players of the winner
+			// player is the winner
+			gameState.toDo = ToDo.GAMEOVER
+			gameState.save()
 		} else {
+			// player can no longer take a turn
 			player.accusationIncorrect = true;
-			// TODO: Update game state
-			// TODO: Inform the player their accusation is incorrect and
-			// they will be skipped from moving and guessing
+			gameState.save()
 		}
 	}
 

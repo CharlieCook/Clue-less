@@ -289,6 +289,14 @@ class GameState {
 		if(nextPlayerIndex > 5) {
 			nextPlayerIndex = 0
 		}
+		// check if the player has already made a false accusation.  If so the player is skipped for the rest of the game.
+		if(getPlayers()[nextPlayerIndex].accusationIncorrect) {
+			nextPlayerIndex++
+			if(nextPlayerIndex > 5) {
+				nextPlayerIndex = 0
+			}
+		}
+		// Update the game state with the new player
 		waitingOn = WaitingOn.values()[nextPlayerIndex + 1]
 		toDo = CurrentAction.TURNMOVE
 		currentPlayer = nextPlayerIndex
