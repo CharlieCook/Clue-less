@@ -107,7 +107,7 @@ class GameEngineService {
 			gameState.solutionWeapon.equals(guessedWeapon) &&
 			gameState.solutionLocation.equals(guessedLocation)) {
 			// player is the winner
-			gameState.toDo = ToDo.GAMEOVER
+			gameState.toDo = CurrentAction.GAMEOVER
 			gameState.save()
 		} else {
 			// player can no longer take a turn
